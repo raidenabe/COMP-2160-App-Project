@@ -9,6 +9,8 @@ public class SessionManagement {
 
     private final String SHARED_PREFERENCES_NAME = "UserSession";
     private final String IS_LOGGED_IN = "IsLoggedIn";
+    private final String USER_ID = "UserId";
+    private final String USER_EMAIL = "UserEmail";
 
     public SessionManagement(Context context)
     {
@@ -21,10 +23,16 @@ public class SessionManagement {
         return sharedPreferences.getBoolean(IS_LOGGED_IN, false);
     }
 
-    public void createLoginSession()
+    public void createLoginSession(int userId, String email)
     {
         editor.putBoolean(IS_LOGGED_IN, true);
+        editor.putInt(USER_ID,userId);
+        editor.putString(USER_EMAIL,email);
         editor.apply();
+    }
+
+    public int getUserId(){
+        return sharedPreferences.getInt(USER_ID,-1);
     }
 
     public void logOut()

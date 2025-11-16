@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.se.omapi.Session;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +27,8 @@ public class SleepTrackerFragment extends Fragment {
 
     long duration = 0;
     DatabaseHelper db;
-
+    SessionManagement sessionManagement;
+    int userId;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -37,6 +39,8 @@ public class SleepTrackerFragment extends Fragment {
         setWakeBtn = view.findViewById(R.id.setWakeBtn);
         saveBtn = view.findViewById(R.id.saveSleepBtn);
         recyclerView = view.findViewById(R.id.recyclerViewSleep);
+        sessionManagement = new SessionManagement(getContext());
+        userId = sessionManagement.getUserId();
 
         db = new DatabaseHelper(getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -62,7 +66,7 @@ public class SleepTrackerFragment extends Fragment {
                 if(duration<0){
                     duration+= 24*60*60*1000;
                 }
-                boolean success = db.addSleepRecord(sleepTime[0],wakeTime[0],duration);
+                boolean success = db.addSleepRecord(sleepTime[0],wakeTime[0],duration,userId);
                 Toast.makeText(getContext(),success ? "Sleep saved": "error" + duration,Toast.LENGTH_SHORT).show();
                 loadSleepRecords();
             }
@@ -73,7 +77,7 @@ public class SleepTrackerFragment extends Fragment {
     }
 
     private void loadSleepRecords(){
-        adapter = new SleepAdapter(db.getAllSleepRecords());
+        adapter = new SleepAdapter(db.getAllSleepRecords(userId));
         recyclerView.setAdapter(adapter);
     }
 

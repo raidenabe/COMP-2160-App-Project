@@ -56,7 +56,8 @@ public class LoginActivity extends AppCompatActivity {
                         // if email and password are found and match in database, creates login session and sends to main activity
                         if (checkEmailAndPassword)
                         {
-                            sessionManagement.createLoginSession();
+                            int userId = db.getUserIdByEmail(email);
+                            sessionManagement.createLoginSession(userId,email);
 
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);

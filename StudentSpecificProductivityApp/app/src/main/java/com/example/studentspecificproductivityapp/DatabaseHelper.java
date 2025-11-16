@@ -27,6 +27,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String COLUMN_DURATION = "DURATION";
 
+    public static final String COLUMN_USER_ID = "USER_ID";
+
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, "UserDb", null, 2);
@@ -37,7 +39,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String createTableStatement = "CREATE TABLE " + USER_TABLE + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_USER_EMAIL + " TEXT, " + COLUMN_USER_PASSWORD + " TEXT)";
 
-        String createTableSleep = "CREATE TABLE " + SLEEP_TABLE + " ("+ COLUMN_SLEEP_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_SLEEP_TIME + " INTEGER, " + COLUMN_WAKE_TIME + " INTEGER," + COLUMN_DURATION + " INTEGER)";
+        String createTableSleep = "CREATE TABLE " + SLEEP_TABLE + " ("+ COLUMN_SLEEP_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_SLEEP_TIME + " INTEGER, " + COLUMN_WAKE_TIME + " INTEGER," + COLUMN_DURATION + " INTEGER,"+ COLUMN_USER_ID + " INTEGER)" ;
 
         db.execSQL(createTableStatement);
         db.execSQL(createTableSleep);
@@ -85,26 +87,37 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return emailPasswordFound;
     }
 
+    public int getUserIdByEmail(String email){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("Select * from " + USER_TABLE + " where " + COLUMN_USER_EMAIL + " = ? " , new String[]{email});
+        int userId = -1;
+        if(cursor.moveToFirst()){
+            userId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID));
+        }
+        cursor.close();
+        return userId;
+    }
 
     // SLEEP METHODS
 
-    public boolean addSleepRecord(long sleepTime, long wakeTime, long duration){
+    public boolean addSleepRecord(long sleepTime, long wakeTime, long duration, int userId){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
         cv.put(COLUMN_SLEEP_TIME, sleepTime);
         cv.put(COLUMN_WAKE_TIME, wakeTime);
         cv.put(COLUMN_DURATION, duration);
+        cv.put(COLUMN_USER_ID,userId);
 
         long insert = db.insert(SLEEP_TABLE, null, cv);
         return insert!=-1;
     }
 
-    public ArrayList<SleepModel> getAllSleepRecords(){
+    public ArrayList<SleepModel> getAllSleepRecords(int userId){
 
         ArrayList<SleepModel> arr = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("Select * from " + SLEEP_TABLE,null);
+        Cursor cursor = db.rawQuery("Select * from " + SLEEP_TABLE + " WHERE " + COLUMN_USER_ID + " =?",new String[]{String.valueOf(userId)});
         while(cursor.moveToNext()){
             SleepModel rec = new SleepModel(cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_SLEEP_ID)),
                     cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_SLEEP_TIME)),
