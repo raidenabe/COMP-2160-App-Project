@@ -1,0 +1,32 @@
+package com.example.studentspecificproductivityapp;
+
+import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+
+
+public class HomeFragment extends Fragment {
+
+    Button sleepTrackerButton;
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        sleepTrackerButton = view.findViewById(R.id.sleepTrackerButton);
+        sleepTrackerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity mainActivity = (MainActivity) getActivity();
+                mainActivity.getViewPager().setCurrentItem(3);
+            }
+        });
+        return view;
+    }
+}
