@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="StudentSpecificProductivityApp">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/StudentSpecificProductivityApp.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
