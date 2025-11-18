@@ -25,7 +25,7 @@ public class TasksFragment extends Fragment {
     Button addBtn;
     RecyclerView recyclerView;
     TaskAdapter adapter;
-    ArrayList<TaskModel> tasks;
+    ArrayList<TaskModel> tasks; //test
 
 
     @Override
