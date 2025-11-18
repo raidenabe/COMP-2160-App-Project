@@ -3,7 +3,7 @@ package com.example.studentspecificproductivityapp;
 public class User {
     String email, password;
 
-    public User(String password, String email) {
+    public User(String email, String password) {
         this.password = password;
         this.email = email;
     }
