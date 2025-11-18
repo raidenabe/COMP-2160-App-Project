@@ -24,6 +24,8 @@ public class VP2Adapter extends FragmentStateAdapter {
                 return new SettingsFragment();
             case 3:
                 return new SleepTrackerFragment();
+            case 4:
+                return new TasksFragment();
             default:
                 return new HomeFragment();
         }
@@ -31,6 +33,6 @@ public class VP2Adapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 4;
+        return 5;
     }
 }
