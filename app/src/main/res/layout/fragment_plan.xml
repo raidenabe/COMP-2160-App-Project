@@ -13,30 +13,31 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/previousMonthButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="<-"
+            android:text="@string/left_arrow"
             android:textColor="@color/black"
-            android:background="" />
+            android:background="@color/white" />
 
         <TextView
             android:id="@+id/monthYearTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Nov 2025"
             android:textSize="20dp"
             android:gravity="center_horizontal"
             android:textColor="@color/black"/>
 
         <Button
+            android:id="@+id/nextMonthButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="->"
+            android:text="@string/right_arrow"
             android:textColor="@color/black"
-            android:background="" />
+            android:background="@color/white" />
     </LinearLayout>
 
     <LinearLayout

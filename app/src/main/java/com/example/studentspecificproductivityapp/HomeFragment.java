@@ -12,20 +12,32 @@ import android.widget.Button;
 
 public class HomeFragment extends Fragment {
 
-    Button sleepTrackerButton, toDoListButton;
+    Button planButton, sleepTrackerButton, toDoListButton;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        planButton = view.findViewById(R.id.weeklyPlanButton);
         sleepTrackerButton = view.findViewById(R.id.sleepTrackerButton);
         toDoListButton = view.findViewById(R.id.toDoListButton);
+
+
+        planButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity mainActivity = (MainActivity) getActivity();
+                mainActivity.getViewPager().setCurrentItem(3);
+            }
+        });
+
         sleepTrackerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MainActivity mainActivity = (MainActivity) getActivity();
-                mainActivity.getViewPager().setCurrentItem(3);
+                mainActivity.getViewPager().setCurrentItem(4);
             }
         });
 
@@ -33,7 +45,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 MainActivity mainActivity = (MainActivity) getActivity();
-                mainActivity.getViewPager().setCurrentItem(4);
+                mainActivity.getViewPager().setCurrentItem(5);
             }
         });
         return view;

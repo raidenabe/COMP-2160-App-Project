@@ -16,4 +16,6 @@
     <string name="study">Study</string>
     <string name="sleep_tracker">Sleep Tracker</string>
     <string name="to_do_list">To-Do List</string>
+    <string name="left_arrow"><![CDATA[<-]]></string>
+    <string name="right_arrow"><![CDATA[->]]></string>
 </resources>
