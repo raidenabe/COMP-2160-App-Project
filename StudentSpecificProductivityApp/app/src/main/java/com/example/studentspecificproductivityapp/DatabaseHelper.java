@@ -10,15 +10,15 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
-public class DatabaseHelper extends SQLiteOpenHelper {
+public class  DatabaseHelper extends SQLiteOpenHelper {
 
-    //USER TABLE
+
     public static final String USER_TABLE = "USER_TABLE";
     public static final String COLUMN_USER_EMAIL = "USER_EMAIL";
     public static final String COLUMN_USER_PASSWORD = "USER_PASSWORD";
     public static final String COLUMN_ID = "ID";
 
-    //SLEEP TABLE
+
     public static final String SLEEP_TABLE = "SLEEP_TABLE";
 
     public static final String COLUMN_SLEEP_ID = "SLEEP_ID";
@@ -31,7 +31,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String COLUMN_USER_ID = "USER_ID";
 
-    // TO DO LIST TABLE
 
     public static final String TASKS_TABLE = "TASKS_TABLE";
     public static final String COLUMN_TASK_ID = "TASK_ID";
@@ -40,13 +39,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_TASK_DESC = "TASK_DESC";
     public static final String COLUMN_TASK_COMPLETED = "TASK_COMPLETED";
 
-
+    // STUDY SESSION TABLE
+    public static final String STUDY_TABLE = "STUDY_TABLE";
+    public static final String COLUMN_STUDY_ID = "STUDY_ID";
+    public static final String COLUMN_STUDY_USER_ID = "STUDY_USER_ID";
+    public static final String COLUMN_STUDY_SUBJECT = "STUDY_SUBJECT";
+    public static final String COLUMN_STUDY_START_TIME = "STUDY_START_TIME";
+    public static final String COLUMN_STUDY_END_TIME = "STUDY_END_TIME";
+    public static final String COLUMN_STUDY_DURATION = "STUDY_DURATION";
+    public static final String COLUMN_STUDY_NOTES = "STUDY_NOTES";
 
     public DatabaseHelper(@Nullable Context context) {
-        super(context, "UserDb", null, 2);
+        super(context, "UserDb", null, 3);
     }
 
-    // when database is first accessed.
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTableStatement = "CREATE TABLE " + USER_TABLE + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_USER_EMAIL + " TEXT, " + COLUMN_USER_PASSWORD + " TEXT)";
@@ -55,17 +61,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String createTableTasks = "CREATE TABLE " + TASKS_TABLE + " ("+ COLUMN_TASK_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_TASK_TITLE + " TEXT, " + COLUMN_TASK_DESC + " TEXT," + COLUMN_TASK_COMPLETED + " INTEGER DEFAULT 0," + COLUMN_TASK_USER_ID + " INTEGER)" ;
 
+        String createTableStudy = "CREATE TABLE " + STUDY_TABLE + " (" + COLUMN_STUDY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_STUDY_SUBJECT + " TEXT, " + COLUMN_STUDY_START_TIME + " INTEGER, " + COLUMN_STUDY_END_TIME + " INTEGER, " + COLUMN_STUDY_DURATION + " INTEGER, " + COLUMN_STUDY_NOTES + " TEXT, " + COLUMN_STUDY_USER_ID + " INTEGER)";
+
         db.execSQL(createTableStatement);
         db.execSQL(createTableSleep);
         db.execSQL(createTableTasks);
+        db.execSQL(createTableStudy);
     }
 
-    // when database version number changes.
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + USER_TABLE);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + SLEEP_TABLE);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TASKS_TABLE);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + STUDY_TABLE);
         onCreate(sqLiteDatabase);
     }
 
@@ -114,7 +123,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return userId;
     }
 
-    // SLEEP METHODS
 
     public boolean addSleepRecord(long sleepTime, long wakeTime, long duration, int userId){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -151,7 +159,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    //To Do List
     public boolean addTask(String title, String desc, int userId){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -189,5 +196,43 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean deleteTask(int taskId){
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TASKS_TABLE, COLUMN_TASK_ID+"=?",new String[]{String.valueOf(taskId)})>0;
+    }
+
+    // STUDY SESSION METHODS
+    public boolean addStudySession(String subject, long startTime, long endTime, long duration, String notes, int userId){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_STUDY_SUBJECT, subject);
+        cv.put(COLUMN_STUDY_START_TIME, startTime);
+        cv.put(COLUMN_STUDY_END_TIME, endTime);
+        cv.put(COLUMN_STUDY_DURATION, duration);
+        cv.put(COLUMN_STUDY_NOTES, notes);
+        cv.put(COLUMN_STUDY_USER_ID, userId);
+        long insert = db.insert(STUDY_TABLE, null, cv);
+        return insert != -1;
+    }
+
+    public ArrayList<StudySessionModel> getAllStudySessions(int userId){
+        ArrayList<StudySessionModel> arr = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("Select * from " + STUDY_TABLE + " WHERE " + COLUMN_STUDY_USER_ID + " =?", new String[]{String.valueOf(userId)});
+        while(cursor.moveToNext()){
+            StudySessionModel rec = new StudySessionModel(
+                    cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_STUDY_ID)),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_STUDY_USER_ID)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_STUDY_SUBJECT)),
+                    cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_STUDY_START_TIME)),
+                    cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_STUDY_END_TIME)),
+                    cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_STUDY_DURATION)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_STUDY_NOTES)));
+            arr.add(rec);
+        }
+        cursor.close();
+        return arr;
+    }
+
+    public boolean deleteStudySession(int studyId){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(STUDY_TABLE, COLUMN_STUDY_ID+"=?", new String[]{String.valueOf(studyId)})>0;
     }
 }
