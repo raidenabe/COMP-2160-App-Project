@@ -38,16 +38,13 @@ public class StudyAdapter extends RecyclerView.Adapter<StudyAdapter.ViewHolder> 
         StudySessionModel model = studyList.get(position);
         holder.studySubject.setText(model.getSubject());
 
-        // Format duration
         long hours = model.getDuration() / 3600000;
         long minutes = (model.getDuration() % 3600000) / 60000;
         holder.studyDuration.setText(String.format(Locale.getDefault(), "Duration: %dh %dm", hours, minutes));
 
-        // Format date
         SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.getDefault());
         holder.studyDate.setText(sdf.format(new Date(model.getStartTime())));
 
-        // Display notes
         if (model.getNotes() != null && !model.getNotes().isEmpty()) {
             holder.studyNotes.setText("Notes: " + model.getNotes());
             holder.studyNotes.setVisibility(View.VISIBLE);
