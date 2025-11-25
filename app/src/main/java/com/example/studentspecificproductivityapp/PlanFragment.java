@@ -74,7 +74,7 @@ public class PlanFragment extends Fragment implements PlanCalendarAdapter.OnItem
         calendarRecyclerView.setAdapter(adapter);
     }
 
-    private ArrayList<String> daysInMonthArrayList(LocalDate localDate)
+    private ArrayList<String> daysInMonthArrayList(LocalDate selectedDate)
     {
         ArrayList<String> daysInMonthArrayList = new ArrayList<>();
 
