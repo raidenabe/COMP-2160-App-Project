@@ -11,13 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class PlanFragment extends Fragment {
+public class PlanFragment extends Fragment implements PlanCalendarAdapter.OnItemClickListener {
     Button previousMonthButton, nextMonthButton;
     TextView monthYearText;
     RecyclerView calendarRecyclerView;
@@ -67,7 +68,7 @@ public class PlanFragment extends Fragment {
 
         ArrayList<String> daysInMonthArrayList = daysInMonthArrayList(selectedDate);
 
-        CalendarAdapter adapter = new CalendarAdapter(daysInMonthArrayList);
+        PlanCalendarAdapter adapter = new PlanCalendarAdapter(getContext(), daysInMonthArrayList, this);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 7);
         calendarRecyclerView.setLayoutManager(layoutManager);
         calendarRecyclerView.setAdapter(adapter);
@@ -87,7 +88,7 @@ public class PlanFragment extends Fragment {
 
         int dayOfWeek = firstOfTheMonth.getDayOfWeek().getValue();
 
-        for (int i = 1; i <= 42; i++)
+        for (int i = 1; i <= 38; i++)
         {
             if (i <= dayOfWeek || i > daysInMonth + dayOfWeek)
             {
@@ -100,5 +101,15 @@ public class PlanFragment extends Fragment {
         }
 
         return daysInMonthArrayList;
+    }
+
+    @Override
+    public void onItemClick(String dayText, int position) {
+        if (!dayText.isEmpty())
+        {
+
+            Toast.makeText(getContext(), "hello", Toast.LENGTH_SHORT).show();
+        }
+
     }
 }

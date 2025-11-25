@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StudentSpecificProductivityApp">
         <activity
+            android:name=".PlanDailyCalendarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PlanEventEditActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
