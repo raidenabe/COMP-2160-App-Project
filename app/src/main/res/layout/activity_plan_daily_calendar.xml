@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".PlanFragment">
+    tools:context=".PlanCalendarOldFragment">
 
 
     <LinearLayout
@@ -13,20 +13,21 @@
         android:orientation="horizontal">
 
         <Button
-                android:id="@+id/previousDayButton"
+            android:id="@+id/previousDayButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/left_arrow"
             android:textColor="@color/black"
-            android:background="@color/white" />
+            android:background="null" />
 
         <TextView
-            android:id="@+id/monthYearTextView"
+            android:id="@+id/monthDayTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:textSize="20dp"
+            android:textSize="20sp"
+            android:text="Nov 2025"
             android:gravity="center_horizontal"
             android:textColor="@color/black"/>
 
@@ -37,7 +38,7 @@
             android:layout_weight="1"
             android:text="@string/right_arrow"
             android:textColor="@color/black"
-            android:background="@color/white" />
+            android:background="null" />
 
     </LinearLayout>
 
@@ -45,10 +46,27 @@
         android:id="@+id/dayOfWeekTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="18sp"
         android:text="Monday"
         android:layout_marginBottom="20dp"
         android:gravity="center_horizontal"
         android:textColor="@color/black"/>
+
+    <Button
+        android:id="@+id/addEventButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Event"
+        android:background="null"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_gravity="center"
+        android:textSize="20sp" />
+
+    <ListView
+        android:id="@+id/hourListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5" />
 
 </LinearLayout>

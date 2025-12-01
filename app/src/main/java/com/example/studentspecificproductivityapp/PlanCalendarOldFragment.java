@@ -18,7 +18,7 @@ import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class PlanFragment extends Fragment implements PlanCalendarAdapter.OnItemClickListener {
+public class PlanCalendarOldFragment extends Fragment implements PlanCalendarAdapter.OnItemClickListener {
     Button previousMonthButton, nextMonthButton;
     TextView monthYearText;
     RecyclerView calendarRecyclerView;
@@ -28,7 +28,7 @@ public class PlanFragment extends Fragment implements PlanCalendarAdapter.OnItem
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_plan, container, false);
+        View view = inflater.inflate(R.layout.fragment_calendar_old_plan, container, false);
 
         // View Binding
         monthYearText = view.findViewById(R.id.monthYearTextView);
