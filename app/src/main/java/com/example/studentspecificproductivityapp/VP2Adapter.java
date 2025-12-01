@@ -23,7 +23,7 @@ public class VP2Adapter extends FragmentStateAdapter {
             case 2:
                 return new SettingsFragment();
             case 3:
-                return new HomeFragment();
+                return new PlanCalendarFragment();
             case 4:
                 return new SleepTrackerFragment();
             case 5:

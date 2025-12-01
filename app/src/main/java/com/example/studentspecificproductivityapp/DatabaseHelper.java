@@ -40,6 +40,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_TASK_DESC = "TASK_DESC";
     public static final String COLUMN_TASK_COMPLETED = "TASK_COMPLETED";
 
+    // PLAN EVENT TABLE
+
+    public static final String PLAN_EVENTS_TABLE = "PLAN_EVENTS_TABLE";
+    public static final String COLUMN_PLAN_EVENTS_ID = "PLAN_EVENTS_ID";
+    public static final String COLUMN_PLAN_EVENTS_NAME = "PLAN_EVENTS_NAME";
+    public static final String COLUMN_PLAN_EVENTS_DESC = "PLAN_EVENTS_DESC";
+    public static final String COLUMN_PLAN_EVENTS_TIME = "PLAN_EVENTS_TIME";
+
 
 
     public DatabaseHelper(@Nullable Context context) {
@@ -69,6 +77,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
+    // USER METHODS
     public boolean addUser (User user)
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -151,7 +160,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    //To Do List
+    // TO DO LIST METHODS
     public boolean addTask(String title, String desc, int userId){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -190,4 +199,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TASKS_TABLE, COLUMN_TASK_ID+"=?",new String[]{String.valueOf(taskId)})>0;
     }
+
+    // PLAN EVENT METHODS
 }
