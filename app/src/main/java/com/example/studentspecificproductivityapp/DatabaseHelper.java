@@ -225,15 +225,15 @@ public class  DatabaseHelper extends SQLiteOpenHelper {
     }
 
     // PLAN EVENT METHODS
-    public boolean addPlanEvent(int userId, String date, String name, String desc, String time) {
+    public boolean addPlanEvent(PlanEventModel event) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(COLUMN_PLAN_EVENTS_USER_ID, userId);
-        cv.put(COLUMN_PLAN_EVENTS_DATE, date);
-        cv.put(COLUMN_PLAN_EVENTS_NAME, name);
-        cv.put(COLUMN_PLAN_EVENTS_DESC, desc);
-        cv.put(COLUMN_PLAN_EVENTS_TIME, time);
+        cv.put(COLUMN_PLAN_EVENTS_USER_ID, event.getUserId());
+        cv.put(COLUMN_PLAN_EVENTS_DATE, event.getDate());
+        cv.put(COLUMN_PLAN_EVENTS_NAME, event.getName());
+        cv.put(COLUMN_PLAN_EVENTS_DESC, event.getDescription());
+        cv.put(COLUMN_PLAN_EVENTS_TIME, event.getTime());
 
         long insert = db.insert(PLAN_EVENTS_TABLE, null, cv);
         return insert != -1;

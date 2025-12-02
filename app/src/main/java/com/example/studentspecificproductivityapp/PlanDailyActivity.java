@@ -32,8 +32,9 @@ public class PlanDailyActivity extends AppCompatActivity implements PlanEventAda
     private ArrayList<PlanEventModel> eventList;
     SessionManagement sessionManagement;
     private DatabaseHelper db;
-    PlanEventAdapter adapter;
+    private PlanEventAdapter adapter;
     private int userId;
+    private String date;
 
 
     @Override
@@ -58,44 +59,21 @@ public class PlanDailyActivity extends AppCompatActivity implements PlanEventAda
         db = new DatabaseHelper(PlanDailyActivity.this);
 
         Intent intent = getIntent();
-        String date = intent.getStringExtra("Date");
+        date = intent.getStringExtra("Date");
 
         dateTextView.setText(date);
 
-        // Set event list
         eventList = new ArrayList<>();
 
         // Gets an event list holding the added events from the user at that date
         ArrayList<PlanEventModel> loadEventsList = new ArrayList<>();
         loadEventsList = db.getAllPlannedEventsOnDateForUser(userId, date);
 
-        // Creates an event list of blank events with times corresponding to the hour of the day.
-        // If an event is found in the database at the same date and time from the user, it will
-        // update the previous event list to include the added events.
-        for (int i = 0; i < 24; i++) {
-            String time = String.format(Locale.getDefault(), "%02d:00", i);
-            PlanEventModel event;
+        // Sets the event list to new events with userId, time, and date, but placeholder values
+        // for name and description
+        loadEventList(loadEventsList);
 
-            event = new PlanEventModel(userId, date, "", "", time);
-
-            for (PlanEventModel loadedEvent: loadEventsList)
-            {
-                if (time.equals(loadedEvent.getTime()))
-                {
-                    event.setName(loadedEvent.getName());
-                    event.setDescription(loadedEvent.getDescription());
-                }
-            }
-
-            eventList.add(event);
-        }
-
-        // Creates an adapter with the event list and sets it to recycler view
-        adapter = new PlanEventAdapter(eventList);
-        adapter.setOnItemLongClickListener(this);
-        dailyPlanRecyclerView.setAdapter(adapter);
-        dailyPlanRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-
+        // Goes back to Main Activity
         goBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -136,7 +114,10 @@ public class PlanDailyActivity extends AppCompatActivity implements PlanEventAda
                         String desc = inputDesc.getText().toString();
                         String time = String.format(Locale.getDefault(), "%02d:00", inputTime.getHour());
 
-                        db.addPlanEvent(userId, date, name, desc, time);
+                        PlanEventModel event = new PlanEventModel(userId, date, name, desc, time);
+                        addToEventList(eventList, event);
+                        db.addPlanEvent(event);
+
                         adapter.notifyDataSetChanged();
                     }
                 });
@@ -149,14 +130,70 @@ public class PlanDailyActivity extends AppCompatActivity implements PlanEventAda
                 builder.show();
             }
         });
+
+        // Creates an adapter with the event list and sets it to recycler view
+        adapter = new PlanEventAdapter(eventList);
+        adapter.setOnItemLongClickListener(this);
+        dailyPlanRecyclerView.setAdapter(adapter);
+        dailyPlanRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
     }
     
     @Override
     public void onItemLongClick(int position) {
         PlanEventModel event = eventList.get(position);
         db.deletePlanEvent(userId, event.getDate(), event.getTime());
+        removeFromEventList(eventList, event);
         adapter.notifyDataSetChanged();
     }
 
+    public void loadEventList(ArrayList<PlanEventModel> EventList)
+    {
+        // Creates an event list of blank events with times corresponding to the hour of the day.
+        // If an event is found in the database at the same date and time from the user, it will
+        // update the previous event list to include the added events.
+        for (int i = 0; i < 24; i++) {
+            String time = String.format(Locale.getDefault(), "%02d:00", i);
+            PlanEventModel event;
+
+            event = new PlanEventModel(userId, date, "", "", time);
+
+            for (PlanEventModel loadedEvent: EventList)
+            {
+                if (time.equals(loadedEvent.getTime()))
+                {
+                    event.setName(loadedEvent.getName());
+                    event.setDescription(loadedEvent.getDescription());
+                }
+            }
+
+            eventList.add(event);
+        }
+    }
+
+    public void addToEventList(ArrayList<PlanEventModel> EventList, PlanEventModel addedEvent)
+    {
+
+            for (PlanEventModel event: EventList)
+            {
+                if (event.getTime().equals(addedEvent.getTime()))
+                {
+                    event.setName(addedEvent.getName());
+                    event.setDescription(addedEvent.getDescription());
+                }
+            }
+    }
+
+    public void removeFromEventList(ArrayList<PlanEventModel> EventList, PlanEventModel removedEvent)
+    {
+
+        for (PlanEventModel event: EventList)
+        {
+            if (event.getTime().equals(removedEvent.getTime()))
+            {
+                event.setName("");
+                event.setDescription("");
+            }
+        }
+    }
 
 }

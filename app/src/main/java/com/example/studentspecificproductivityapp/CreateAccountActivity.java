@@ -18,6 +18,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     TextView signInRedirect;
     Button createAccountButton;
     EditText createAccountEmail, createAccountPassword;
+    DatabaseHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,8 @@ public class CreateAccountActivity extends AppCompatActivity {
         createAccountEmail = findViewById(R.id.createAccountEmail);
         createAccountPassword = findViewById(R.id.createAccountPassword);
 
+        db = new DatabaseHelper(this);
+
         // creates new user and moves to sign in page
         createAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,8 +47,10 @@ public class CreateAccountActivity extends AppCompatActivity {
                 String userEmail = createAccountEmail.getText().toString();
                 String userPassword = createAccountPassword.getText().toString();
 
+                if (db.checkEmail(userEmail))
+                    Toast.makeText(CreateAccountActivity.this, "Email is already in use. Please login or try a different email.", Toast.LENGTH_SHORT).show();
                 // validates that none of the fields are empty
-                if (!(userEmail.isEmpty() || userPassword.isEmpty()))
+                 else if (!(userEmail.isEmpty() || userPassword.isEmpty()))
                 {
                     user = new User(userEmail, userPassword);
 
