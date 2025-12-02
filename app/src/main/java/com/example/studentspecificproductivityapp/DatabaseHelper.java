@@ -44,10 +44,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String PLAN_EVENTS_TABLE = "PLAN_EVENTS_TABLE";
     public static final String COLUMN_PLAN_EVENTS_ID = "PLAN_EVENTS_ID";
+    public static final String COLUMN_PLAN_EVENTS_USER_ID = "PLAN_EVENTS_USER_ID";
+    public static final String COLUMN_PLAN_EVENTS_DATE = "PLAN_EVENTS_DATE";
     public static final String COLUMN_PLAN_EVENTS_NAME = "PLAN_EVENTS_NAME";
     public static final String COLUMN_PLAN_EVENTS_DESC = "PLAN_EVENTS_DESC";
     public static final String COLUMN_PLAN_EVENTS_TIME = "PLAN_EVENTS_TIME";
-
 
 
     public DatabaseHelper(@Nullable Context context) {
@@ -59,13 +60,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String createTableStatement = "CREATE TABLE " + USER_TABLE + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_USER_EMAIL + " TEXT, " + COLUMN_USER_PASSWORD + " TEXT)";
 
-        String createTableSleep = "CREATE TABLE " + SLEEP_TABLE + " ("+ COLUMN_SLEEP_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_SLEEP_TIME + " INTEGER, " + COLUMN_WAKE_TIME + " INTEGER," + COLUMN_DURATION + " INTEGER,"+ COLUMN_USER_ID + " INTEGER)" ;
+        String createTableSleep = "CREATE TABLE " + SLEEP_TABLE + " (" + COLUMN_SLEEP_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_SLEEP_TIME + " INTEGER, " + COLUMN_WAKE_TIME + " INTEGER," + COLUMN_DURATION + " INTEGER," + COLUMN_USER_ID + " INTEGER)";
 
-        String createTableTasks = "CREATE TABLE " + TASKS_TABLE + " ("+ COLUMN_TASK_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_TASK_TITLE + " TEXT, " + COLUMN_TASK_DESC + " TEXT," + COLUMN_TASK_COMPLETED + " INTEGER DEFAULT 0," + COLUMN_TASK_USER_ID + " INTEGER)" ;
+        String createTableTasks = "CREATE TABLE " + TASKS_TABLE + " (" + COLUMN_TASK_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_TASK_TITLE + " TEXT, " + COLUMN_TASK_DESC + " TEXT," + COLUMN_TASK_COMPLETED + " INTEGER DEFAULT 0," + COLUMN_TASK_USER_ID + " INTEGER)";
+
+        String createTablePlanEvents = "CREATE TABLE " + PLAN_EVENTS_TABLE + " (" + COLUMN_PLAN_EVENTS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_PLAN_EVENTS_USER_ID + " INTEGER, " + COLUMN_PLAN_EVENTS_DATE + " TEXT, " + COLUMN_PLAN_EVENTS_NAME + " TEXT," + COLUMN_PLAN_EVENTS_DESC + " TEXT," + COLUMN_PLAN_EVENTS_TIME + " INTEGER)";
 
         db.execSQL(createTableStatement);
         db.execSQL(createTableSleep);
         db.execSQL(createTableTasks);
+        db.execSQL(createTablePlanEvents);
     }
 
     // when database version number changes.
@@ -74,12 +78,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + USER_TABLE);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + SLEEP_TABLE);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TASKS_TABLE);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + PLAN_EVENTS_TABLE);
+        onCreate(sqLiteDatabase);
+    }
+
+    @Override
+    public void onDowngrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + USER_TABLE);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + SLEEP_TABLE);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TASKS_TABLE);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + PLAN_EVENTS_TABLE);
         onCreate(sqLiteDatabase);
     }
 
     // USER METHODS
-    public boolean addUser (User user)
-    {
+    public boolean addUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -90,8 +103,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return insert != -1;
     }
 
-    public boolean checkEmail(String email)
-    {
+    public boolean checkEmail(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("Select * from " + USER_TABLE + " where " + COLUMN_USER_EMAIL + " = ?", new String[]{email});
 
@@ -101,8 +113,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return emailFound;
     }
 
-    public boolean checkEmailPassword(String email, String password)
-    {
+    public boolean checkEmailPassword(String email, String password) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("Select * from " + USER_TABLE + " where " + COLUMN_USER_EMAIL + " = ? and " + COLUMN_USER_PASSWORD + " = ?", new String[]{email, password});
 
@@ -112,11 +123,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return emailPasswordFound;
     }
 
-    public int getUserIdByEmail(String email){
+    public int getUserIdByEmail(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("Select * from " + USER_TABLE + " where " + COLUMN_USER_EMAIL + " = ? " , new String[]{email});
+        Cursor cursor = db.rawQuery("Select * from " + USER_TABLE + " where " + COLUMN_USER_EMAIL + " = ? ", new String[]{email});
         int userId = -1;
-        if(cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             userId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID));
         }
         cursor.close();
@@ -125,25 +136,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // SLEEP METHODS
 
-    public boolean addSleepRecord(long sleepTime, long wakeTime, long duration, int userId){
+    public boolean addSleepRecord(long sleepTime, long wakeTime, long duration, int userId) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
         cv.put(COLUMN_SLEEP_TIME, sleepTime);
         cv.put(COLUMN_WAKE_TIME, wakeTime);
         cv.put(COLUMN_DURATION, duration);
-        cv.put(COLUMN_USER_ID,userId);
+        cv.put(COLUMN_USER_ID, userId);
 
         long insert = db.insert(SLEEP_TABLE, null, cv);
-        return insert!=-1;
+        return insert != -1;
     }
 
-    public ArrayList<SleepModel> getAllSleepRecords(int userId){
+    public ArrayList<SleepModel> getAllSleepRecords(int userId) {
 
         ArrayList<SleepModel> arr = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("Select * from " + SLEEP_TABLE + " WHERE " + COLUMN_USER_ID + " =?",new String[]{String.valueOf(userId)});
-        while(cursor.moveToNext()){
+        Cursor cursor = db.rawQuery("Select * from " + SLEEP_TABLE + " WHERE " + COLUMN_USER_ID + " =?", new String[]{String.valueOf(userId)});
+        while (cursor.moveToNext()) {
             SleepModel rec = new SleepModel(cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_SLEEP_ID)),
                     cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_SLEEP_TIME)),
                     cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_WAKE_TIME)),
@@ -154,40 +165,40 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return arr;
     }
 
-    public boolean deleteSleepRecord(int id){
+    public boolean deleteSleepRecord(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(SLEEP_TABLE, COLUMN_SLEEP_ID + "=?", new String[]{String.valueOf(id)})>0;
+        return db.delete(SLEEP_TABLE, COLUMN_SLEEP_ID + "=?", new String[]{String.valueOf(id)}) > 0;
     }
 
 
     // TO DO LIST METHODS
-    public boolean addTask(String title, String desc, int userId){
+    public boolean addTask(String title, String desc, int userId) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_TASK_USER_ID, userId);
         cv.put(COLUMN_TASK_TITLE, title);
-        cv.put(COLUMN_TASK_DESC,desc);
+        cv.put(COLUMN_TASK_DESC, desc);
         long insert = db.insert(TASKS_TABLE, null, cv);
-        return insert!=-1;
+        return insert != -1;
     }
 
-    public ArrayList<TaskModel> getAllTasks(int userId){
+    public ArrayList<TaskModel> getAllTasks(int userId) {
         ArrayList<TaskModel> arr = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("Select * from " + TASKS_TABLE + " WHERE " + COLUMN_TASK_USER_ID + " =?",new String[]{String.valueOf(userId)});
-        while(cursor.moveToNext()){
+        Cursor cursor = db.rawQuery("Select * from " + TASKS_TABLE + " WHERE " + COLUMN_TASK_USER_ID + " =?", new String[]{String.valueOf(userId)});
+        while (cursor.moveToNext()) {
             TaskModel rec = new TaskModel(cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_TASK_ID)),
                     cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_TASK_USER_ID)),
                     cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TASK_TITLE)),
                     cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TASK_DESC)),
-                    cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_TASK_COMPLETED))==1);
+                    cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_TASK_COMPLETED)) == 1);
             arr.add(rec);
         }
         cursor.close();
         return arr;
     }
 
-    public boolean setTaskCompleted (int taskId, boolean completed){
+    public boolean setTaskCompleted(int taskId, boolean completed) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_TASK_COMPLETED, completed ? 1 : 0);
@@ -195,10 +206,57 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return rows > 0;
     }
 
-    public boolean deleteTask(int taskId){
+    public boolean deleteTask(int taskId) {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(TASKS_TABLE, COLUMN_TASK_ID+"=?",new String[]{String.valueOf(taskId)})>0;
+        return db.delete(TASKS_TABLE, COLUMN_TASK_ID + "=?", new String[]{String.valueOf(taskId)}) > 0;
     }
 
     // PLAN EVENT METHODS
+    public boolean addPlanEvent(int userId, String date, String name, String desc, String time) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(COLUMN_PLAN_EVENTS_USER_ID, userId);
+        cv.put(COLUMN_PLAN_EVENTS_DATE, date);
+        cv.put(COLUMN_PLAN_EVENTS_NAME, name);
+        cv.put(COLUMN_PLAN_EVENTS_DESC, desc);
+        cv.put(COLUMN_PLAN_EVENTS_TIME, time);
+
+        long insert = db.insert(PLAN_EVENTS_TABLE, null, cv);
+        return insert != -1;
+    }
+
+    public boolean deletePlanEvent(int userId, String date, String time)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(PLAN_EVENTS_TABLE, COLUMN_PLAN_EVENTS_USER_ID + " = ? and " + COLUMN_PLAN_EVENTS_DATE + " = ? and " + COLUMN_PLAN_EVENTS_TIME + " = ? ", new String[]{String.valueOf(userId), date, time}) > 0;
+    }
+
+    public boolean userHasPlannedEventsOnDate(int userId, String date) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("Select * from " + PLAN_EVENTS_TABLE + " where " + COLUMN_PLAN_EVENTS_USER_ID + " = ? and " + COLUMN_PLAN_EVENTS_DATE + " = ? ", new String[]{String.valueOf(userId), date});
+
+        boolean dateFound = cursor.getCount() > 0;
+        db.close();
+        cursor.close();
+        return dateFound;
+    }
+
+    public ArrayList<PlanEventModel> getAllPlannedEventsOnDateForUser(int userId, String date) {
+        ArrayList<PlanEventModel> arr = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("Select * from " + PLAN_EVENTS_TABLE + " WHERE " + COLUMN_PLAN_EVENTS_USER_ID + " = ? and " + COLUMN_PLAN_EVENTS_DATE + " = ? ", new String[]{String.valueOf(userId), date});
+        while (cursor.moveToNext()) {
+            PlanEventModel rec = new PlanEventModel(
+                    cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_PLAN_EVENTS_USER_ID)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PLAN_EVENTS_DATE)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PLAN_EVENTS_NAME)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PLAN_EVENTS_DESC)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PLAN_EVENTS_TIME)));
+            arr.add(rec);
+        }
+        db.close();
+        cursor.close();
+        return arr;
+    }
 }

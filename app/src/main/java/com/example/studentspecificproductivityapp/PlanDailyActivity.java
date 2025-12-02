@@ -3,6 +3,7 @@ package com.example.studentspecificproductivityapp;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,18 +18,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class PlanDailyActivity extends AppCompatActivity {
+public class PlanDailyActivity extends AppCompatActivity implements PlanEventAdapter.OnItemLongClickListener{
     private RecyclerView dailyPlanRecyclerView;
     private TextView dateTextView;
     private ImageButton addEventButton, goBackButton;
     private ArrayList<PlanEventModel> eventList;
+    SessionManagement sessionManagement;
     private DatabaseHelper db;
+    PlanEventAdapter adapter;
+    private int userId;
 
 
     @Override
@@ -47,6 +52,11 @@ public class PlanDailyActivity extends AppCompatActivity {
         addEventButton = findViewById(R.id.addEventButton);
         goBackButton = findViewById(R.id.goBackButton);
 
+        sessionManagement = new SessionManagement(PlanDailyActivity.this);
+        userId = sessionManagement.getUserId();
+
+        db = new DatabaseHelper(PlanDailyActivity.this);
+
         Intent intent = getIntent();
         String date = intent.getStringExtra("Date");
 
@@ -55,24 +65,47 @@ public class PlanDailyActivity extends AppCompatActivity {
         // Set event list
         eventList = new ArrayList<>();
 
-        for (int i = 0; i < 24; i++)
-        {
+        // Gets an event list holding the added events from the user at that date
+        ArrayList<PlanEventModel> loadEventsList = new ArrayList<>();
+        loadEventsList = db.getAllPlannedEventsOnDateForUser(userId, date);
+
+        // Creates an event list of blank events with times corresponding to the hour of the day.
+        // If an event is found in the database at the same date and time from the user, it will
+        // update the previous event list to include the added events.
+        for (int i = 0; i < 24; i++) {
             String time = String.format(Locale.getDefault(), "%02d:00", i);
-            PlanEventModel event = new PlanEventModel("", "", time);
+            PlanEventModel event;
+
+            event = new PlanEventModel(userId, date, "", "", time);
+
+            for (PlanEventModel loadedEvent: loadEventsList)
+            {
+                if (time.equals(loadedEvent.getTime()))
+                {
+                    event.setName(loadedEvent.getName());
+                    event.setDescription(loadedEvent.getDescription());
+                }
+            }
+
             eventList.add(event);
         }
 
-        PlanEventAdapter adapter = new PlanEventAdapter(eventList);
+        // Creates an adapter with the event list and sets it to recycler view
+        adapter = new PlanEventAdapter(eventList);
+        adapter.setOnItemLongClickListener(this);
         dailyPlanRecyclerView.setAdapter(adapter);
         dailyPlanRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
         goBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(PlanDailyActivity.this, PlanCalendarFragment.class));
+                Intent intent = new Intent(PlanDailyActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
 
+        // Alert Dialog that allows user to add event to a specific date
+        // Will save in Database and be able to be retrieved later
         addEventButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -103,34 +136,27 @@ public class PlanDailyActivity extends AppCompatActivity {
                         String desc = inputDesc.getText().toString();
                         String time = String.format(Locale.getDefault(), "%02d:00", inputTime.getHour());
 
-                        for (int num = 0; num < eventList.size(); num++)
-                        {
-                            PlanEventModel event = eventList.get(num);
-                            String eventTime = event.getTime();
-
-                            if (eventTime.equals(time))
-                            {
-                                event.setName(name);
-                                event.setDescription(desc);
-                                adapter.notifyItemChanged(num);
-
-
-                            }
-                        }
+                        db.addPlanEvent(userId, date, name, desc, time);
+                        adapter.notifyDataSetChanged();
                     }
                 });
-
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.cancel();
                     }
                 });
-
                 builder.show();
-
             }
         });
-
     }
+    
+    @Override
+    public void onItemLongClick(int position) {
+        PlanEventModel event = eventList.get(position);
+        db.deletePlanEvent(userId, event.getDate(), event.getTime());
+        adapter.notifyDataSetChanged();
+    }
+
+
 }
