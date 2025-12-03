@@ -3,6 +3,8 @@ package com.example.studentspecificproductivityapp;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import androidx.appcompat.app.AppCompatDelegate;
+
 public class SessionManagement {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -11,6 +13,7 @@ public class SessionManagement {
     private final String IS_LOGGED_IN = "IsLoggedIn";
     private final String USER_ID = "UserId";
     private final String USER_EMAIL = "UserEmail";
+    private final String PREF_DARK_MODE = "dark_mode";
 
     public SessionManagement(Context context)
     {
@@ -39,5 +42,25 @@ public class SessionManagement {
     {
         editor.clear();
         editor.apply();
+    }
+
+    public void saveTheme(boolean darkModeEnabled)
+    {
+        editor.putBoolean(PREF_DARK_MODE, darkModeEnabled);
+        editor.apply();
+    }
+
+    public boolean isDarkModeEnabled()
+    {
+        return sharedPreferences.getBoolean(PREF_DARK_MODE, false);
+    }
+
+    public void updateTheme()
+    {
+        boolean isDarkModeEnabled = isDarkModeEnabled();
+        if (isDarkModeEnabled)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        else
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
     }
 }
