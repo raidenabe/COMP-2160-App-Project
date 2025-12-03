@@ -23,4 +23,18 @@
     <string name="time">Time</string>
     <string name="name">Name</string>
     <string name="description">Description</string>
+    <string name="set_sleep_time">Set Sleep Time</string>
+    <string name="set_wake_time">Set Wake Time</string>
+    <string name="save">Save</string>
+    <string name="notes_optional">Notes (optional)</string>
+    <string name="subject_e_g_math_biology">Subject (e.g., Math, Biology)</string>
+    <string name="study_timer">Study Timer</string>
+    <string name="_00_00_00">00:00:00</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="study_history">Study History</string>
+    <string name="enable_dark_mode">Enable Dark Mode</string>
+    <string name="task_title">Task Title</string>
+    <string name="task_description">Task Description</string>
+    <string name="add">Add</string>
 </resources>

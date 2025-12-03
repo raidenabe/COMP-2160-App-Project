@@ -4,10 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".StudyFragment">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -18,29 +20,35 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Study Timer"
+                android:text="@string/study_timer"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="16dp"/>
+
+            <ImageView
+                android:layout_width="125dp"
+                android:layout_height="125dp"
+                android:layout_margin="20dp"
+                android:src="@drawable/ic_study_timer"/>
 
             <EditText
                 android:id="@+id/subjectInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Subject (e.g., Math, Biology)" />
+                android:hint="@string/subject_e_g_math_biology" />
 
             <EditText
                 android:id="@+id/notesInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Notes (optional)"
+                android:hint="@string/notes_optional"
                 android:layout_marginTop="8dp"/>
 
             <TextView
                 android:id="@+id/timerDisplay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="00:00:00"
+                android:text="@string/_00_00_00"
                 android:textSize="48sp"
                 android:textStyle="bold"
                 android:layout_marginTop="16dp"/>
@@ -56,14 +64,14 @@
                     android:id="@+id/startBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Start"
+                    android:text="@string/start"
                     android:layout_marginEnd="8dp"/>
 
                 <Button
                     android:id="@+id/stopBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Stop"
+                    android:text="@string/stop"
                     android:enabled="false"/>
             </LinearLayout>
 
@@ -72,7 +80,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Study History"
+            android:text="@string/study_history"
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_marginStart="16dp"
