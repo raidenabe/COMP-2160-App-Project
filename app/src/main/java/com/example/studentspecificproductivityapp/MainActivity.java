@@ -17,9 +17,6 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        SessionManagement sessionManagement = new SessionManagement(this);
-        sessionManagement.updateTheme();
-
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
@@ -29,12 +26,14 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        SessionManagement sessionManagement = new SessionManagement(this);
+        sessionManagement.updateTheme();
+
         if(!(sessionManagement.isLoggedIn()))
         {
             Intent intent = new Intent(MainActivity.this, StartUpActivity.class);
             startActivity(intent);
         }
-
 
         viewPager = findViewById(R.id.viewPager);
         bottomNavigationView = findViewById(R.id.bottomNavigationBar);
