@@ -12,8 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StudentSpecificProductivityApp">
         <activity
-            android:name=".MainActivity"
+            android:name=".PlanDailyActivity"
             android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:configChanges="uiMode"/>
         <activity
             android:name=".CreateAccountActivity"
             android:exported="false" />

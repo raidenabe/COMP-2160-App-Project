@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         SessionManagement sessionManagement = new SessionManagement(this);
+        sessionManagement.updateTheme();
+
         if(!(sessionManagement.isLoggedIn()))
         {
             Intent intent = new Intent(MainActivity.this, StartUpActivity.class);

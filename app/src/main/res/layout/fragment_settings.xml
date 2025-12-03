@@ -5,22 +5,32 @@
     android:layout_height="match_parent"
     tools:context=".SettingsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/settingsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
+        android:textStyle="bold"
         android:textSize="25sp"
         android:text="@string/settings_title" />
+
+    <com.google.android.material.materialswitch.MaterialSwitch
+        android:id="@+id/changeTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="140dp"
+        android:layout_marginStart="30dp"
+        android:text="@string/enable_dark_mode"
+        android:textSize="17sp"/>
 
     <Button
         android:id="@+id/signOutButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="500dp"
-        android:text="@string/sign_out" />
+        android:layout_marginTop="600dp"
+        android:text="@string/sign_out"
+        android:textColor="@color/white" />
 
 </FrameLayout>

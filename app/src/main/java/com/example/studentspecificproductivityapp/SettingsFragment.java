@@ -3,20 +3,23 @@ package com.example.studentspecificproductivityapp;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SettingsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.google.android.material.materialswitch.MaterialSwitch;
+import com.google.android.material.switchmaterial.SwitchMaterial;
+
 public class SettingsFragment extends Fragment {
     Button signOutButton;
+    MaterialSwitch changeTheme;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -24,7 +27,10 @@ public class SettingsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
 
         SessionManagement sessionManagement = new SessionManagement(getContext());
+
         signOutButton = view.findViewById(R.id.signOutButton);
+        changeTheme = view.findViewById(R.id.changeTheme);
+
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -32,7 +38,43 @@ public class SettingsFragment extends Fragment {
                 startActivity(new Intent(getContext(), StartUpActivity.class));
             }
         });
+        // Sets initial state of the switch based on the current theme
+        changeTheme.setChecked(sessionManagement.isDarkModeEnabled());
 
+        // Listener for if the switch is on or off
+        changeTheme.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(@NonNull CompoundButton compoundButton, boolean b) {
+                sessionManagement.saveTheme(b);
+                if (b)
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                else
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }
+        });
         return view;
     }
+
+    /*
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        changeTheme = view.findViewById(R.id.changeTheme);
+        SessionManagement sessionManagement = new SessionManagement(getContext());
+        // Sets initial state of the switch based on the current theme
+        changeTheme.setChecked(sessionManagement.isDarkModeEnabled());
+
+        // Listener for if the switch is on or off
+        changeTheme.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(@NonNull CompoundButton compoundButton, boolean b) {
+                sessionManagement.saveTheme(b);
+                if (b)
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                else
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }
+        });
+    } */
 }

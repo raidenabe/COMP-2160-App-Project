@@ -11,32 +11,40 @@
     <ImageView
         android:id="@+id/createAccountImage"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_weight="1"
-        android:src="@drawable/ic_launcher_foreground" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/ic_graduation_icon" />
 
     <EditText
         android:id="@+id/createAccountEmail"
-        android:layout_width="match_parent"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:layout_marginTop="60dp"
+        android:layout_gravity="center"
         android:ems="10"
         android:hint="@string/enter_your_email"
         android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/createAccountPassword"
-        android:layout_width="match_parent"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
         android:ems="10"
         android:inputType="textPassword"
         android:hint="@string/enter_your_password" />
 
     <Button
         android:id="@+id/createAccountButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="15dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
         android:layout_weight="1"
         android:text="@string/create_account" />
 
@@ -44,13 +52,14 @@
         android:layout_width="match_parent"
         android:layout_height="15dp"
         android:layout_weight="10"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/alreadyHaveAccountText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="75dp"
             android:text="@string/already_have_an_account" />
 
         <TextView

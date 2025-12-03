@@ -9,30 +9,43 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:layout_marginTop="50dp"
+            android:src="@drawable/ic_sleep_tracker"/>
 
         <Button
             android:id="@+id/setSleepBtn"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Set Sleep Time" />
+            android:layout_marginTop="80dp"
+            android:text="@string/set_sleep_time" />
 
         <Button
             android:id="@+id/setWakeBtn"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Set Wake Time" />
+            android:text="@string/set_wake_time" />
 
         <Button
             android:id="@+id/saveSleepBtn"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Save" />
+            android:layout_marginTop="20dp"
+            android:text="@string/save" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewSleep"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingTop="8dp"/>
+
     </LinearLayout>
+
 
 </FrameLayout>
