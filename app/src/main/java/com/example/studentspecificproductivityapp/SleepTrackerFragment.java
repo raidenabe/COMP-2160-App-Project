@@ -72,8 +72,6 @@ public class SleepTrackerFragment extends Fragment {
             }
         });
         return view;
-
-
     }
 
     private void loadSleepRecords(){
@@ -86,8 +84,6 @@ public class SleepTrackerFragment extends Fragment {
         });
 
         recyclerView.setAdapter(adapter);
-
-
     }
 
     private void pickTime(long[] time){

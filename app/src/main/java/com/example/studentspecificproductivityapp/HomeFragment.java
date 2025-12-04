@@ -12,27 +12,32 @@ import android.widget.Button;
 
 public class HomeFragment extends Fragment {
 
-    Button planButton, studyButton, sleepTrackerButton, toDoListButton;
+    Button courseScheduleButton, planButton, studyButton, sleepTrackerButton, toDoListButton;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        // Binds views
+        courseScheduleButton = view.findViewById(R.id.courseScheduleButton);
         planButton = view.findViewById(R.id.weeklyPlanButton);
         sleepTrackerButton = view.findViewById(R.id.sleepTrackerButton);
         toDoListButton = view.findViewById(R.id.toDoListButton);
         studyButton = view.findViewById(R.id.studyButton);
 
-        planButton.setOnClickListener(new View.OnClickListener() {
+        // Sets on click listeners to navigate to respective fragments
+
+        courseScheduleButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 MainActivity mainActivity = (MainActivity) getActivity();
                 mainActivity.getViewPager().setCurrentItem(3,false);
             }
         });
 
-        studyButton.setOnClickListener(new View.OnClickListener() {
+        planButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MainActivity mainActivity = (MainActivity) getActivity();
@@ -40,7 +45,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        sleepTrackerButton.setOnClickListener(new View.OnClickListener() {
+        studyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MainActivity mainActivity = (MainActivity) getActivity();
@@ -48,11 +53,19 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        toDoListButton.setOnClickListener(new View.OnClickListener() {
+        sleepTrackerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MainActivity mainActivity = (MainActivity) getActivity();
                 mainActivity.getViewPager().setCurrentItem(6,false);
+            }
+        });
+
+        toDoListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity mainActivity = (MainActivity) getActivity();
+                mainActivity.getViewPager().setCurrentItem(7,false);
             }
         });
         return view;

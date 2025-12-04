@@ -19,6 +19,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     Button createAccountButton;
     EditText createAccountEmail, createAccountPassword;
     DatabaseHelper db;
+    SessionManagement sessionManagement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,8 @@ public class CreateAccountActivity extends AppCompatActivity {
         createAccountButton = findViewById(R.id.createAccountButton);
         createAccountEmail = findViewById(R.id.createAccountEmail);
         createAccountPassword = findViewById(R.id.createAccountPassword);
+
+        sessionManagement = new SessionManagement(this);
 
         db = new DatabaseHelper(this);
 

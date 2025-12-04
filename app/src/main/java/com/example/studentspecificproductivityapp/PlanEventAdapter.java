@@ -3,7 +3,6 @@ package com.example.studentspecificproductivityapp;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,8 +13,13 @@ import java.util.ArrayList;
 public class PlanEventAdapter extends RecyclerView.Adapter<PlanEventAdapter.ViewHolder> {
     private ArrayList<PlanEventModel> eventList = new ArrayList<PlanEventModel>();
     private OnItemLongClickListener onItemLongClickListener;
+
     public PlanEventAdapter(ArrayList<PlanEventModel> eventList) {
         this.eventList = eventList;
+    }
+
+    public interface OnItemLongClickListener {
+        void onItemLongClick(int position);
     }
 
     @NonNull
@@ -31,16 +35,11 @@ public class PlanEventAdapter extends RecyclerView.Adapter<PlanEventAdapter.View
         holder.hourTextView.setText(planEvent.getTime());
         holder.eventNameTextView.setText(planEvent.getName());
         holder.eventDescriptionTextView.setText(planEvent.getDescription());
-
     }
 
     @Override
     public int getItemCount() {
         return eventList.size();
-    }
-
-    public interface OnItemLongClickListener {
-        void onItemLongClick(int position);
     }
 
     public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener)

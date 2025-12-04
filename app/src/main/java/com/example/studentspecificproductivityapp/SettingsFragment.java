@@ -13,12 +13,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
 public class SettingsFragment extends Fragment {
-    Button signOutButton;
+    Button signOutButton, changeEmailButton;
+    EditText newEmailText;
     MaterialSwitch changeTheme;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,8 +32,12 @@ public class SettingsFragment extends Fragment {
 
         SessionManagement sessionManagement = new SessionManagement(getContext());
 
+        DatabaseHelper db = new DatabaseHelper(getContext());
+
         signOutButton = view.findViewById(R.id.signOutButton);
+        changeEmailButton = view.findViewById(R.id.changeEmailButton);
         changeTheme = view.findViewById(R.id.changeTheme);
+        newEmailText = view.findViewById(R.id.newEmailEditText);
 
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,6 +46,15 @@ public class SettingsFragment extends Fragment {
                 startActivity(new Intent(getContext(), StartUpActivity.class));
             }
         });
+
+        changeEmailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String newEmail = newEmailText.getText().toString();
+                db.changeEmail(sessionManagement.getUserId(), newEmail);
+            }
+        });
+
         // Sets initial state of the switch based on the current theme
         changeTheme.setChecked(sessionManagement.isDarkModeEnabled());
 
@@ -54,27 +71,4 @@ public class SettingsFragment extends Fragment {
         });
         return view;
     }
-
-    /*
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        changeTheme = view.findViewById(R.id.changeTheme);
-        SessionManagement sessionManagement = new SessionManagement(getContext());
-        // Sets initial state of the switch based on the current theme
-        changeTheme.setChecked(sessionManagement.isDarkModeEnabled());
-
-        // Listener for if the switch is on or off
-        changeTheme.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(@NonNull CompoundButton compoundButton, boolean b) {
-                sessionManagement.saveTheme(b);
-                if (b)
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                else
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            }
-        });
-    } */
 }

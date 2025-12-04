@@ -60,9 +60,19 @@ public class  DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_PLAN_EVENTS_DESC = "PLAN_EVENTS_DESC";
     public static final String COLUMN_PLAN_EVENTS_TIME = "PLAN_EVENTS_TIME";
 
+    // COURSE SCHEDULE TABLE
+
+    public static final String COURSE_TABLE = "COURSE_TABLE";
+    public static final String COLUMN_COURSE_ID = "COURSE_ID";
+    public static final String COLUMN_COURSE_USER_ID = "COURSE_USER_ID";
+    public static final String COLUMN_COURSE_CODE = "COURSE_CODE";
+    public static final String COLUMN_COURSE_NAME = "COURSE_NAME";
+    public static final String COLUMN_COURSE_DAYS = "COURSE_DAYS";
+    public static final String COLUMN_COURSE_HOURS = "COURSE_HOURS";
+
 
     public DatabaseHelper(@Nullable Context context) {
-        super(context, "UserDb", null, 3);
+        super(context, "UserDb", null, 2);
     }
 
     @Override
@@ -77,11 +87,14 @@ public class  DatabaseHelper extends SQLiteOpenHelper {
 
         String createTableStudy = "CREATE TABLE " + STUDY_TABLE + " (" + COLUMN_STUDY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_STUDY_SUBJECT + " TEXT, " + COLUMN_STUDY_START_TIME + " INTEGER, " + COLUMN_STUDY_END_TIME + " INTEGER, " + COLUMN_STUDY_DURATION + " INTEGER, " + COLUMN_STUDY_NOTES + " TEXT, " + COLUMN_STUDY_USER_ID + " INTEGER)";
 
+        String createTableCourses = "CREATE TABLE " + COURSE_TABLE + " (" + COLUMN_COURSE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_COURSE_USER_ID + " INTEGER, " + COLUMN_COURSE_CODE + " TEXT, " + COLUMN_COURSE_NAME + " TEXT," + COLUMN_COURSE_DAYS + " TEXT," + COLUMN_COURSE_HOURS + " TEXT)";
+
         db.execSQL(createTableStatement);
         db.execSQL(createTableSleep);
         db.execSQL(createTableTasks);
         db.execSQL(createTablePlanEvents);
         db.execSQL(createTableStudy);
+        db.execSQL(createTableCourses);
     }
 
     @Override
@@ -91,6 +104,7 @@ public class  DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TASKS_TABLE);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + PLAN_EVENTS_TABLE);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + STUDY_TABLE);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + COURSE_TABLE);
         onCreate(sqLiteDatabase);
     }
 
@@ -101,6 +115,7 @@ public class  DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TASKS_TABLE);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + PLAN_EVENTS_TABLE);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + STUDY_TABLE);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + COURSE_TABLE);
         onCreate(sqLiteDatabase);
     }
 
@@ -134,6 +149,18 @@ public class  DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         cursor.close();
         return emailPasswordFound;
+    }
+
+    public boolean changeEmail(int userId, String newEmail)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(COLUMN_USER_EMAIL, newEmail);
+
+        long update = db.update(USER_TABLE, cv, COLUMN_ID + " = ? ", new String[]{String.valueOf(userId)});
+        //db.close();
+        return update != -1;
     }
 
     public int getUserIdByEmail(String email){
@@ -309,5 +336,43 @@ public class  DatabaseHelper extends SQLiteOpenHelper {
     public boolean deleteStudySession(int studyId){
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(STUDY_TABLE, COLUMN_STUDY_ID+"=?", new String[]{String.valueOf(studyId)})>0;
+    }
+
+    // COURSE SCHEDULE METHODS
+    public boolean addCourse(CourseModel course) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(COLUMN_COURSE_USER_ID, course.getUserId());
+        cv.put(COLUMN_COURSE_CODE, course.getCourseCode());
+        cv.put(COLUMN_COURSE_NAME, course.getCourseName());
+        cv.put(COLUMN_COURSE_DAYS, course.getCourseDaysOfTheWeek());
+        cv.put(COLUMN_COURSE_HOURS, course.getCourseHours());
+
+        long insert = db.insert(COURSE_TABLE, null, cv);
+        return insert != -1;
+    }
+
+    public boolean deleteCourse(int userId, String courseCode){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(COURSE_TABLE, COLUMN_COURSE_USER_ID + " = ? and " + COLUMN_COURSE_CODE + " = ? ", new String[]{String.valueOf(userId), courseCode}) > 0;
+    }
+
+    public ArrayList<CourseModel> getAllCoursesForUser(int userId) {
+        ArrayList<CourseModel> arr = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("Select * from " + COURSE_TABLE + " WHERE " + COLUMN_COURSE_USER_ID + " = ? ", new String[]{String.valueOf(userId)});
+        while (cursor.moveToNext()) {
+            CourseModel course = new CourseModel(
+                    cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_COURSE_USER_ID)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_COURSE_CODE)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_COURSE_NAME)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_COURSE_DAYS)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_COURSE_HOURS)));
+            arr.add(course);
+        }
+        db.close();
+        cursor.close();
+        return arr;
     }
 }

@@ -27,6 +27,33 @@
         android:text="@string/enable_dark_mode"
         android:textSize="17sp"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="200dp"
+        android:textSize="17sp"
+        android:text="Change Email" />
+
+    <EditText
+        android:id="@+id/newEmailEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="240dp"
+        android:ems="7"
+        android:textSize="13sp"
+        android:hint="Enter new email" />
+
+    <Button
+        android:id="@+id/changeEmailButton"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="280dp"
+        android:backgroundTint="@color/primaryBtn"
+        android:text="Apply" />
+
     <Button
         android:id="@+id/signOutButton"
         android:layout_width="wrap_content"
@@ -35,6 +62,7 @@
         android:layout_marginTop="600dp"
         android:text="@string/sign_out"
         android:backgroundTint="@color/primaryBtn"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        android:textSize="11sp"/>
 
 </FrameLayout>

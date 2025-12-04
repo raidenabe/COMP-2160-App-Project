@@ -23,12 +23,14 @@ public class VP2Adapter extends FragmentStateAdapter {
             case 2:
                 return new SettingsFragment();
             case 3:
-                return new PlanCalendarFragment();
+                return new CourseScheduleFragment();
             case 4:
-                return new StudyFragment();
+                return new PlanCalendarFragment();
             case 5:
-                return new SleepTrackerFragment();
+                return new StudyFragment();
             case 6:
+                return new SleepTrackerFragment();
+            case 7:
                 return new TasksFragment();
             default:
                 return new HomeFragment();
@@ -37,6 +39,6 @@ public class VP2Adapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 7;
+        return 8;
     }
 }
