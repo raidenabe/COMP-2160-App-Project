@@ -22,6 +22,7 @@
             android:layout_height="wrap_content"
             android:text="Subject"
             android:textSize="20sp"
+            android:textColor="@color/primaryText"
             android:textStyle="bold"/>
 
         <TextView
@@ -29,6 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Duration"
+            android:textColor="@color/secondaryText"
             android:textSize="16sp"/>
 
         <TextView
@@ -36,6 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Date"
+            android:textColor="@color/secondaryText"
             android:textSize="14sp"/>
 
         <TextView
@@ -43,6 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Notes"
+            android:textColor="@color/secondaryText"
             android:textSize="14sp"
             android:layout_marginTop="4dp"/>
     </LinearLayout>
@@ -54,6 +58,8 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:text="delete"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/secondaryBtn"
         android:padding="4dp"/>
 
 </LinearLayout>

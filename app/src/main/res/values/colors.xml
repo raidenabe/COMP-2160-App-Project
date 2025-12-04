@@ -4,4 +4,11 @@
     <color name="white">#FFFFFFFF</color>
     <color name="blue">#2196F3</color>
     <color name="transparent">#00000000</color>
+    <color name="primaryBtn">#1E3A8A</color>
+    <color name="secondaryBtn">#3B82F6</color>
+    <color name="background">#F3F4F6</color>
+    <color name="primaryText">#111827</color>
+    <color name="secondaryText">#374151</color>
+    <color name="primaryicons">#1E3A8A</color>
+    <color name="cardBackground">#FFFFFF</color>
 </resources>

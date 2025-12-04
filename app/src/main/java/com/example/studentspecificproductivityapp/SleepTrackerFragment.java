@@ -77,8 +77,17 @@ public class SleepTrackerFragment extends Fragment {
     }
 
     private void loadSleepRecords(){
-        adapter = new SleepAdapter(db.getAllSleepRecords(userId));
+        adapter = new SleepAdapter(db.getAllSleepRecords(userId), new SleepAdapter.Callback(){
+            @Override
+            public void onDelete(SleepModel sleep) {
+                db.deleteSleepRecord(sleep.getId());
+                loadSleepRecords();
+            }
+        });
+
         recyclerView.setAdapter(adapter);
+
+
     }
 
     private void pickTime(long[] time){

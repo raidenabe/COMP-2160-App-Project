@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".CreateAccountActivity">
+    tools:context=".CreateAccountActivity"
+    android:background="@color/background">
 
     <ImageView
         android:id="@+id/createAccountImage"
@@ -46,7 +47,10 @@
         android:layout_gravity="center"
         android:layout_marginTop="40dp"
         android:layout_weight="1"
-        android:text="@string/create_account" />
+        android:text="@string/create_account"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/primaryBtn"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"

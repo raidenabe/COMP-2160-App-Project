@@ -15,6 +15,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
     ViewPager2 viewPager;
     BottomNavigationView bottomNavigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,11 +45,11 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(menuItem -> {
             int itemId = menuItem.getItemId();
             if (itemId == R.id.home)
-                viewPager.setCurrentItem(0);
+                viewPager.setCurrentItem(0,false);
             else if (itemId == R.id.profile)
-                    viewPager.setCurrentItem(1);
+                    viewPager.setCurrentItem(1,false);
             else if (itemId == R.id.settings)
-                    viewPager.setCurrentItem(2);
+                    viewPager.setCurrentItem(2,false);
             return true;
         });
 
@@ -74,4 +75,5 @@ public class MainActivity extends AppCompatActivity {
     public ViewPager2 getViewPager(){
         return viewPager;
     }
+
 }

@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment">
+    tools:context=".HomeFragment"
+    android:background="@color/background">
 
     <TextView
         android:id="@+id/homeTitle"
@@ -13,7 +14,9 @@
         android:layout_marginTop="50dp"
         android:textStyle="bold"
         android:textSize="25sp"
-        android:text="@string/home_title" />
+        android:text="@string/home_title"
+        android:textColor="@color/primaryText"
+        />
 
     <Button
         android:id="@+id/courseScheduleButton"
@@ -21,7 +24,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="300dp"
-        android:text="@string/view_course_schedule" />
+        android:text="@string/view_course_schedule"
+        android:backgroundTint="@color/primaryBtn"
+        android:textColor="@color/white"
+        />
 
     <Button
         android:id="@+id/weeklyPlanButton"
@@ -29,7 +35,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="350dp"
-        android:text="@string/weekly_plan" />
+        android:text="@string/weekly_plan"
+        android:backgroundTint="@color/primaryBtn"
+        android:textColor="@color/white"
+        />
 
     <Button
         android:id="@+id/studyButton"
@@ -37,7 +46,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="400dp"
-        android:text="@string/study" />
+        android:text="@string/study"
+        android:backgroundTint="@color/primaryBtn"
+        android:textColor="@color/white"
+        />
 
     <Button
         android:id="@+id/sleepTrackerButton"
@@ -45,7 +57,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="450dp"
-        android:text="@string/sleep_tracker" />
+        android:text="@string/sleep_tracker"
+        android:backgroundTint="@color/primaryBtn"
+        android:textColor="@color/white"
+        />
 
     <Button
         android:id="@+id/toDoListButton"
@@ -53,7 +68,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="500dp"
-        android:text="@string/to_do_list" />
+        android:text="@string/to_do_list"
+        android:backgroundTint="@color/primaryBtn"
+        android:textColor="@color/white"
+        />
 
 
 </FrameLayout>

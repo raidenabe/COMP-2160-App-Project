@@ -1,6 +1,7 @@
 package com.example.studentspecificproductivityapp;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,10 +50,26 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
         holder.checkBoxComplete.setOnCheckedChangeListener(null);
         holder.checkBoxComplete.setChecked(model.isCompleted());
+        if(model.isCompleted()){
+            holder.taskTitle.setPaintFlags(holder.taskTitle.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            holder.taskDesc.setPaintFlags(holder.taskDesc.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        }else{
+            holder.taskTitle.setPaintFlags(holder.taskTitle.getPaintFlags() & ~(Paint.STRIKE_THRU_TEXT_FLAG));
+            holder.taskDesc.setPaintFlags(holder.taskDesc.getPaintFlags() & ~(Paint.STRIKE_THRU_TEXT_FLAG));
+        }
+
 
         holder.checkBoxComplete.setOnCheckedChangeListener(((buttonView, isChecked) -> {
             model.setCompleted(isChecked);
             if(cb!= null){cb.onToggleComplete(model,isChecked);}
+            if(isChecked){
+                holder.taskTitle.setPaintFlags(holder.taskTitle.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                holder.taskDesc.setPaintFlags(holder.taskDesc.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            }else{
+                holder.taskTitle.setPaintFlags(holder.taskTitle.getPaintFlags() & ~(Paint.STRIKE_THRU_TEXT_FLAG));
+                holder.taskDesc.setPaintFlags(holder.taskDesc.getPaintFlags() & ~(Paint.STRIKE_THRU_TEXT_FLAG));
+            }
+
         }));
 
         holder.deleteBtn.setOnClickListener(v ->{

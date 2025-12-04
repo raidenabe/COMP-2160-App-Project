@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileFragment">
+    tools:context=".ProfileFragment"
+    android:background="@color/background">
 
     <TextView
         android:id="@+id/profileTitle"
@@ -13,6 +14,8 @@
         android:layout_marginTop="50dp"
         android:textStyle="bold"
         android:textSize="25sp"
-        android:text="@string/profile_title" />
+        android:text="@string/profile_title"
+        android:textColor="@color/primaryText"
+        />
 
 </FrameLayout>

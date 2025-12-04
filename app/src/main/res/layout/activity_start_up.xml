@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".StartUpActivity">
+    tools:context=".StartUpActivity"
+    android:background="@color/background">
 
     <ImageView
         android:id="@+id/startUpScreenImage"
@@ -21,7 +22,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="90dp"
-        android:text="@string/sign_in" />
+        android:text="@string/sign_in"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/primaryBtn"/>
 
     <Button
         android:id="@+id/signUpButton"
@@ -29,5 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="25dp"
-        android:text="@string/sign_up" />
+        android:text="@string/sign_up"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/primaryBtn"/>
 </LinearLayout>

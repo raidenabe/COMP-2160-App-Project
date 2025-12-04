@@ -19,7 +19,6 @@ public class HomeFragment extends Fragment {
 
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
         planButton = view.findViewById(R.id.weeklyPlanButton);
         sleepTrackerButton = view.findViewById(R.id.sleepTrackerButton);
         toDoListButton = view.findViewById(R.id.toDoListButton);
@@ -29,7 +28,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 MainActivity mainActivity = (MainActivity) getActivity();
-                mainActivity.getViewPager().setCurrentItem(3);
+                mainActivity.getViewPager().setCurrentItem(3,false);
             }
         });
 
@@ -37,7 +36,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 MainActivity mainActivity = (MainActivity) getActivity();
-                mainActivity.getViewPager().setCurrentItem(4);
+                mainActivity.getViewPager().setCurrentItem(4,false);
             }
         });
 
@@ -45,7 +44,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 MainActivity mainActivity = (MainActivity) getActivity();
-                mainActivity.getViewPager().setCurrentItem(5);
+                mainActivity.getViewPager().setCurrentItem(5,false);
             }
         });
 
@@ -53,7 +52,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 MainActivity mainActivity = (MainActivity) getActivity();
-                mainActivity.getViewPager().setCurrentItem(6);
+                mainActivity.getViewPager().setCurrentItem(6,false);
             }
         });
         return view;

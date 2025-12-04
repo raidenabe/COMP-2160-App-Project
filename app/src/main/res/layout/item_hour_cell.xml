@@ -18,6 +18,8 @@
         android:layout_height="60dp"
         android:gravity="center"
         android:text="Event Name"
+        android:textColor="@color/primaryText"
+
         android:textSize="15sp" />
 
     <TextView android:id="@+id/eventDescriptionTextView"
@@ -25,6 +27,7 @@
         android:layout_height="60dp"
         android:gravity="center"
         android:text="Description"
+        android:textColor="@color/primaryText"
         android:textSize="15sp" />
 
 </LinearLayout>

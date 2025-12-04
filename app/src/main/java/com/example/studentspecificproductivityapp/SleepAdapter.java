@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,11 +19,16 @@ import java.util.Locale;
 
 public class SleepAdapter extends RecyclerView.Adapter<SleepAdapter.ViewHolder> {
 
+    public interface Callback{
+        void onDelete(SleepModel task);
+    }
     private ArrayList<SleepModel> sleepList;
 
+    Callback cb;
     // Constructor to get context and data
-    public SleepAdapter(ArrayList<SleepModel> sleepList) {
+    public SleepAdapter(ArrayList<SleepModel> sleepList, Callback cb) {
         this.sleepList = sleepList;
+        this.cb = cb;
     }
 
     @Override
@@ -42,6 +48,12 @@ public class SleepAdapter extends RecyclerView.Adapter<SleepAdapter.ViewHolder> 
         long minute = (model.getDuration()/(1000*60))%60;
         holder.durationTime.setText("Duration: "+ hours +"h "+ minute+"m");
 
+        holder.deleteBtn.setOnClickListener(v ->{
+            if(cb!=null){
+                cb.onDelete(model);
+            }
+        });
+
     }
 
     @Override
@@ -51,12 +63,14 @@ public class SleepAdapter extends RecyclerView.Adapter<SleepAdapter.ViewHolder> 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView sleepTime, wakeTime, durationTime;
+        Button deleteBtn;
 
         public ViewHolder(View itemView) {
             super(itemView);
             sleepTime = itemView.findViewById(R.id.sleepTime);
             wakeTime = itemView.findViewById(R.id.wakeTime);
             durationTime = itemView.findViewById(R.id.durationTime);
+            deleteBtn = itemView.findViewById(R.id.deleteBtn);
         }
     }
 }
