@@ -375,4 +375,63 @@ public class  DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return arr;
     }
+
+    public long getTotalSleep(int userId){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT SUM("+COLUMN_DURATION+") as total FROM "+SLEEP_TABLE+" WHERE "+ COLUMN_USER_ID+" =?", new String[]{String.valueOf(userId)});
+        long total = 0;
+
+        if(cursor.moveToFirst()){
+            total=cursor.getLong(cursor.getColumnIndexOrThrow("total"));
+        }
+        cursor.close();
+        return  total;
+    }
+    public long getTotalStudyDuration(int userId){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT SUM("+COLUMN_STUDY_DURATION+") as total FROM "+STUDY_TABLE+" WHERE "+ COLUMN_STUDY_USER_ID+" =?", new String[]{String.valueOf(userId)});
+        long total = 0;
+
+        if(cursor.moveToFirst()){
+            total=cursor.getLong(cursor.getColumnIndexOrThrow("total"));
+        }
+        cursor.close();
+        return  total;
+    }
+
+    public long getTaskCount(int userId){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) as total FROM "+TASKS_TABLE+" WHERE "+ COLUMN_TASK_USER_ID+" =?", new String[]{String.valueOf(userId)});
+        long total = 0;
+
+        if(cursor.moveToFirst()){
+            total=cursor.getLong(cursor.getColumnIndexOrThrow("total"));
+        }
+        cursor.close();
+        return  total;
+    }
+
+    public long getCompletedTasksCount(int userId){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) as total FROM "+TASKS_TABLE+" WHERE "+ COLUMN_TASK_USER_ID+" =? AND "+COLUMN_TASK_COMPLETED+" =1", new String[]{String.valueOf(userId)});
+        long total = 0;
+
+        if(cursor.moveToFirst()){
+            total=cursor.getLong(cursor.getColumnIndexOrThrow("total"));
+        }
+        cursor.close();
+        return  total;
+    }
+
+    public long getPlannedEventsCount(int userId){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) as total FROM "+PLAN_EVENTS_TABLE+" WHERE "+ COLUMN_PLAN_EVENTS_USER_ID+" =?", new String[]{String.valueOf(userId)});
+        long total = 0;
+
+        if(cursor.moveToFirst()){
+            total=cursor.getLong(cursor.getColumnIndexOrThrow("total"));
+        }
+        cursor.close();
+        return  total;
+    }
 }
