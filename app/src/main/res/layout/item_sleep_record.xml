@@ -1,78 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/sleepRecord"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:elevation="5dp"
-        android:background="@color/cardBackground"
-        tools:context=".CreateAccountActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sleepRecord"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@drawable/card_bg"
+    android:layout_margin="10dp"
+    android:elevation="4dp"
+    android:padding="12dp"
+    tools:context=".CreateAccountActivity">
+
         <LinearLayout
             android:layout_width="0dp"
+            android:layout_weight="7"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_weight="7"
-            android:gravity="center"
-            android:layout_marginBottom="10sp"
-            android:padding="15dp">
+            android:gravity="center_vertical">
 
                 <TextView
                     android:id="@+id/sleepTime"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Sleep Time: "
-                    android:gravity="center"
+                    android:text="Sleep Time: 10:00 PM"
+                    android:textSize="18sp"
                     android:textColor="@color/secondaryText"
-
-                    android:layout_marginBottom="8sp"
-                    android:textSize="20sp"/>
+                    android:layout_marginBottom="6dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
 
                 <TextView
                     android:id="@+id/wakeTime"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Wake Time: "
-                    android:gravity="center"
+                    android:text="Wake Time: 6:00 AM"
+                    android:textSize="18sp"
                     android:textColor="@color/secondaryText"
-
-                    android:layout_marginBottom="8sp"
-                    android:textSize="20sp"/>
+                    android:layout_marginBottom="6dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
 
                 <TextView
                     android:id="@+id/durationTime"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Duration: "
+                    android:text="Duration: 8h 00m"
+                    android:textSize="18sp"
                     android:textColor="@color/secondaryText"
-
-                    android:textSize="20sp"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:orientation="vertical"
             android:gravity="center"
+            android:layout_height="wrap_content">
 
-            android:layout_marginBottom="10sp"
-            android:padding="15dp">
-        <Button
-            android:id="@+id/deleteBtn"
-            android:layout_gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="delete"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/secondaryBtn"
-            android:padding="4dp"/>
+                <Button
+                    android:id="@+id/deleteBtn"
+                    android:layout_width="90dp"
+                    android:layout_height="38dp"
+                    android:text="Delete"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:backgroundTint="@color/secondaryBtn"/>
         </LinearLayout>
 
 </LinearLayout>
-

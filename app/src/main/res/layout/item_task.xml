@@ -4,71 +4,65 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    tools:context=".CreateAccountActivity"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
-    android:background="@color/cardBackground"
-    android:layout_marginBottom="10dp"
-    android:elevation="5dp">
-
+    android:background="@drawable/card_bg"
+    android:padding="12dp"
+    android:layout_margin="10dp"
+    android:elevation="4dp"
+    tools:context=".CreateAccountActivity">
 
     <LinearLayout
         android:layout_width="0dp"
+        android:layout_weight="7"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_weight="7"
-        android:gravity="left"
-        android:layout_marginBottom="10sp"
-        android:padding="5dp">
+        android:gravity="center_vertical">
+
         <CheckBox
             android:id="@+id/checkBoxComplete"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
+
         <LinearLayout
-            android:padding="12dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            tools:context=".CreateAccountActivity">
-
+            android:layout_marginStart="12dp">
 
             <TextView
                 android:id="@+id/taskTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Task Title"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/primaryText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
             <TextView
                 android:id="@+id/taskDesc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Task description"
                 android:textColor="@color/secondaryText"
-                android:textSize="15sp"/>
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
     </LinearLayout>
-    </LinearLayout>
+
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
         android:layout_weight="3"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:layout_marginBottom="10sp"
-        android:padding="15dp">
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
         <Button
             android:id="@+id/deleteBtn"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="delete"
+            android:layout_width="90dp"
+            android:layout_height="38dp"
+            android:text="Delete"
             android:textColor="@color/white"
-            android:backgroundTint="@color/secondaryBtn"
-            android:padding="4dp"/>
+            android:textSize="14sp"
+            android:backgroundTint="@color/secondaryBtn"/>
     </LinearLayout>
 
 </LinearLayout>
