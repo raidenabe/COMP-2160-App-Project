@@ -159,7 +159,19 @@ public class  DatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_USER_EMAIL, newEmail);
 
         long update = db.update(USER_TABLE, cv, COLUMN_ID + " = ? ", new String[]{String.valueOf(userId)});
-        //db.close();
+        db.close();
+        return update != -1;
+    }
+
+    public boolean changePassword(int userId, String newPassword)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(COLUMN_USER_PASSWORD, newPassword);
+
+        long update = db.update(USER_TABLE, cv, COLUMN_ID + " = ? ", new String[]{String.valueOf(userId)});
+        db.close();
         return update != -1;
     }
 

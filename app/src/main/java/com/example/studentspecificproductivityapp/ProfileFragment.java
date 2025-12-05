@@ -49,7 +49,7 @@ public class ProfileFragment extends Fragment {
         long eventsPlanning = db.getPlannedEventsCount(userId);
         long totalTasksLong = db.getTaskCount(userId);
 
-        sleepRecord.setText("Total Study Time: "+formatHour(sleepDuration));
+        sleepRecord.setText("Total Sleep Time: "+formatHour(sleepDuration));
         studyRecord.setText("Total Study Time: "+ formatHour(studyDuration));
         totalTasks.setText("Total Tasks: "+totalTasksLong);
         completedTasks.setText("Tasks Completed: "+completedTasksLong);

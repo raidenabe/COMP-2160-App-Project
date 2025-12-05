@@ -99,10 +99,12 @@ public class PlanDailyActivity extends AppCompatActivity implements PlanEventAda
 
 
                 LinearLayout linearLayout = new LinearLayout(PlanDailyActivity.this);
+                linearLayout.setPadding(5, 5, 5, 5);
                 linearLayout.setOrientation(LinearLayout.VERTICAL);
                 linearLayout.addView(inputName);
                 linearLayout.addView(inputDesc);
                 linearLayout.addView(inputTime);
+                linearLayout.setPadding(25, 25, 25, 25);
                 builder.setView(linearLayout);
 
                 builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {

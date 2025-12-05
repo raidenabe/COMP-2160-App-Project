@@ -78,6 +78,7 @@ public class CourseScheduleFragment extends Fragment implements CourseAdapter.On
                 linearLayout.addView(inputCourseName);
                 linearLayout.addView(inputCourseDays);
                 linearLayout.addView(inputCourseHours);
+                linearLayout.setPadding(25, 25, 25, 25);
                 builder.setView(linearLayout);
 
                 builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {

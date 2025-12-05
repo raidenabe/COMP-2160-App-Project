@@ -37,4 +37,14 @@
     <string name="task_title">Task Title</string>
     <string name="task_description">Task Description</string>
     <string name="add">Add</string>
+    <string name="update">Update</string>
+    <string name="change_email">Change Email</string>
+    <string name="enter_new_email">Enter new email</string>
+    <string name="change_password">Change Password</string>
+    <string name="enter_new_password">Enter new password</string>
+    <string name="delete">Delete</string>
+    <string name="notes">Notes</string>
+    <string name="date">Date</string>
+    <string name="duration">Duration</string>
+    <string name="subject">Subject</string>
 </resources>
