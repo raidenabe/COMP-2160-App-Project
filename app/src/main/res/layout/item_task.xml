@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:background="@drawable/card_bg"
     android:padding="12dp"
+    android:gravity="center"
     android:layout_margin="10dp"
     android:elevation="4dp"
     tools:context=".CreateAccountActivity">
@@ -14,6 +14,7 @@
         android:layout_width="0dp"
         android:layout_weight="7"
         android:layout_height="wrap_content"
+        android:background="@drawable/card_background"
         android:orientation="horizontal"
         android:gravity="center_vertical">
 

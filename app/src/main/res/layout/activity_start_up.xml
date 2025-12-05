@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".StartUpActivity"
-    android:background="@color/background">
+    android:background="@drawable/singn_in_fixed">
 
     <ImageView
         android:id="@+id/startUpScreenImage"

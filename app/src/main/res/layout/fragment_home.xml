@@ -1,31 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomeFragment"
-    android:background="@color/background">
+    android:background="@color/background"
+    android:layout_marginBottom="15sp">
+
+
+    <ImageView
+        android:id="@+id/bgImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/hero"
+        android:scaleType="centerCrop"
+        android:contentDescription="@null" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/home_gradient" />
+
 
     <TextView
-        android:id="@+id/homeTitle"
+        android:id="@+id/profileTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"
         android:textStyle="bold"
-        android:textSize="25sp"
-        android:text="@string/home_title"
+        android:textSize="24sp"
+        android:letterSpacing="0.03"
+        android:layout_marginTop="50dp"
+        android:text="WELCOME BACK!"
         android:textColor="@color/primaryText"
-        />
-
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="24dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal|center_vertical">
     <Button
         android:id="@+id/courseScheduleButton"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="300dp"
         android:text="@string/view_course_schedule"
         android:backgroundTint="@color/primaryBtn"
+        android:layout_marginTop="12dp"
+        android:padding="5dp"
         android:textColor="@color/white"
         />
 
@@ -34,9 +58,9 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="350dp"
         android:text="@string/weekly_plan"
         android:backgroundTint="@color/primaryBtn"
+        android:layout_marginTop="12dp"
         android:textColor="@color/white"
         />
 
@@ -45,9 +69,9 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="400dp"
         android:text="@string/study"
         android:backgroundTint="@color/primaryBtn"
+        android:layout_marginTop="12dp"
         android:textColor="@color/white"
         />
 
@@ -56,9 +80,9 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="450dp"
         android:text="@string/sleep_tracker"
         android:backgroundTint="@color/primaryBtn"
+        android:layout_marginTop="12dp"
         android:textColor="@color/white"
         />
 
@@ -67,11 +91,13 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="500dp"
         android:text="@string/to_do_list"
         android:backgroundTint="@color/primaryBtn"
+        android:layout_marginTop="12dp"
         android:textColor="@color/white"
         />
+    </LinearLayout>
+
 
 
 </FrameLayout>

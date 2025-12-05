@@ -12,5 +12,6 @@
         <color name="secondaryBtn">#3B82F6</color>
         <color name="primaryicons">#FFFFFF</color>
         <color name="cardBackground">#1E293B</color>
+        <color name="darkBg"></color>
 
 </resources>

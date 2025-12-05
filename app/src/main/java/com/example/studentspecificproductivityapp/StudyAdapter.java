@@ -40,7 +40,8 @@ public class StudyAdapter extends RecyclerView.Adapter<StudyAdapter.ViewHolder> 
 
         long hours = model.getDuration() / 3600000;
         long minutes = (model.getDuration() % 3600000) / 60000;
-        holder.studyDuration.setText(String.format(Locale.getDefault(), "Duration: %dh %dm", hours, minutes));
+        long seconds = ((model.getDuration() % 60000) / 1000);
+        holder.studyDuration.setText(String.format(Locale.getDefault(), "Duration: %dh %dm %ds", hours, minutes,seconds));
 
         SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.getDefault());
         holder.studyDate.setText(sdf.format(new Date(model.getStartTime())));

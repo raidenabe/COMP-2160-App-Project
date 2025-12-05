@@ -49,16 +49,24 @@ public class ProfileFragment extends Fragment {
         long eventsPlanning = db.getPlannedEventsCount(userId);
         long totalTasksLong = db.getTaskCount(userId);
 
-        sleepRecord.setText("Total Study Time: "+formatHour(sleepDuration));
+        sleepRecord.setText("Total Study Time: "+formatHour1(sleepDuration));
         studyRecord.setText("Total Study Time: "+ formatHour(studyDuration));
         totalTasks.setText("Total Tasks: "+totalTasksLong);
         completedTasks.setText("Tasks Completed: "+completedTasksLong);
         plannedEvents.setText("Planned Events: "+ eventsPlanning);
     }
-    public String formatHour(long millis){
+    public String formatHour1(long millis){
         long hours = millis/(1000*60*60);
         long mins = (millis/(1000*60))%60;
 
         return hours + "h "+ mins +"m";
+    }
+
+    public String formatHour(long millis){
+        long hours = millis/(1000*60*60);
+        long mins = (millis/(1000*60))%60;
+        long seconds = (millis%60000)/1000;
+
+        return hours + "h "+ mins +"m "+seconds+"s";
     }
 }
