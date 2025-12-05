@@ -74,19 +74,31 @@
         android:textColor="@color/white"
         />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Music Player"
+        android:textStyle="bold"
+        android:textSize="10sp"
+        android:layout_marginEnd="6dp"
+        android:layout_gravity="end"
+        />
+
     <ImageButton
         android:id="@+id/playMusicButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="50dp"
-        android:src="@drawable/ic_add"
+        android:layout_marginEnd="35dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_music_play"
         android:layout_gravity="end"/>
 
     <ImageButton
         android:id="@+id/stopMusicButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_add"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_music_stop"
         android:layout_gravity="end"/>
 
 
