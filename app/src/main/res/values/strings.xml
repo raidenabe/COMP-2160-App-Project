@@ -35,7 +35,7 @@
     <string name="study_history">Study History</string>
     <string name="enable_dark_mode">Enable Dark Mode</string>
     <string name="task_title">Task Title</string>
-    <string name="task_description">Task Description</string>
+    <string name="task_description">Task Description (Optional)</string>
     <string name="add">Add</string>
     <string name="update">Update</string>
     <string name="change_email">Change Email</string>
