@@ -7,19 +7,18 @@
     <TextView
         android:id="@+id/hourTextView"
         android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:text="10:00"
         android:textSize="15sp" />
 
     <TextView
         android:id="@+id/eventNameTextView"
-        android:layout_width="100dp"
+        android:layout_width="140dp"
         android:layout_height="60dp"
         android:gravity="center"
         android:text="Event Name"
         android:textColor="@color/primaryText"
-
         android:textSize="15sp" />
 
     <TextView android:id="@+id/eventDescriptionTextView"

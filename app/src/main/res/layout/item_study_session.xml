@@ -20,7 +20,7 @@
             android:id="@+id/studySubject"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Subject"
+            android:text="@string/subject"
             android:textSize="20sp"
             android:textColor="@color/primaryText"
             android:textStyle="bold"/>
@@ -29,7 +29,7 @@
             android:id="@+id/studyDuration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Duration"
+            android:text="@string/duration"
             android:textColor="@color/secondaryText"
             android:textSize="16sp"/>
 
@@ -37,7 +37,7 @@
             android:id="@+id/studyDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Date"
+            android:text="@string/date"
             android:textColor="@color/secondaryText"
             android:textSize="14sp"/>
 
@@ -45,7 +45,7 @@
             android:id="@+id/studyNotes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Notes"
+            android:text="@string/notes"
             android:textColor="@color/secondaryText"
             android:textSize="14sp"
             android:layout_marginTop="4dp"/>
@@ -57,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:text="delete"
+        android:text="@string/delete"
         android:textColor="@color/white"
         android:backgroundTint="@color/secondaryBtn"
         android:padding="4dp"/>

@@ -2,6 +2,7 @@ package com.example.studentspecificproductivityapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -52,8 +53,8 @@ public class CreateAccountActivity extends AppCompatActivity {
 
                 if (db.checkEmail(userEmail))
                     Toast.makeText(CreateAccountActivity.this, "Email is already in use. Please login or try a different email.", Toast.LENGTH_SHORT).show();
-                // validates that none of the fields are empty
-                 else if (!(userEmail.isEmpty() || userPassword.isEmpty()))
+                // validates that none of the fields are empty and entered email is a valid email address
+                 else if (!(userEmail.isEmpty() || userPassword.isEmpty()) && Patterns.EMAIL_ADDRESS.matcher(userEmail).matches())
                 {
                     user = new User(userEmail, userPassword);
 
@@ -70,10 +71,11 @@ public class CreateAccountActivity extends AppCompatActivity {
                         Intent intent = new Intent(CreateAccountActivity.this, LoginActivity.class);
                         startActivity(intent);
                     }
-                } else {
-                    Toast.makeText(CreateAccountActivity.this, "Invalid Account Details. Please try again.", Toast.LENGTH_SHORT).show();
                 }
-
+                 else if (!Patterns.EMAIL_ADDRESS.matcher(userEmail).matches())
+                    Toast.makeText(CreateAccountActivity.this, "Email Invalid: Please enter a valid email address.", Toast.LENGTH_SHORT).show();
+                 else
+                    Toast.makeText(CreateAccountActivity.this, "Invalid Account Details. Please try again.", Toast.LENGTH_SHORT).show();
 
             }
         });

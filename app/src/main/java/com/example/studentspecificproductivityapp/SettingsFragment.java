@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +22,8 @@ import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
 public class SettingsFragment extends Fragment {
-    Button signOutButton, changeEmailButton;
-    EditText newEmailText;
+    Button signOutButton, changeEmailButton, changePasswordButton;
+    EditText newEmailText, newPasswordText;
     MaterialSwitch changeTheme;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,8 +37,10 @@ public class SettingsFragment extends Fragment {
 
         signOutButton = view.findViewById(R.id.signOutButton);
         changeEmailButton = view.findViewById(R.id.changeEmailButton);
+        changePasswordButton = view.findViewById(R.id.changePasswordButton);
         changeTheme = view.findViewById(R.id.changeTheme);
         newEmailText = view.findViewById(R.id.newEmailEditText);
+        newPasswordText = view.findViewById(R.id.newPasswordEditText);
 
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,7 +54,20 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 String newEmail = newEmailText.getText().toString();
-                db.changeEmail(sessionManagement.getUserId(), newEmail);
+                if (Patterns.EMAIL_ADDRESS.matcher(newEmail).matches()) {
+                    db.changeEmail(sessionManagement.getUserId(), newEmail);
+                    Toast.makeText(getContext(), "Email changed successfully.", Toast.LENGTH_SHORT).show();
+                }
+                else
+                    Toast.makeText(getContext(), "Please enter a valid email address.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        changePasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String newPassword = newPasswordText.getText().toString();
+                db.changePassword(sessionManagement.getUserId(), newPassword);
             }
         });
 
