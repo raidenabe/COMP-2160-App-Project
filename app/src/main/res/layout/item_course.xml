@@ -2,40 +2,59 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:layout_margin="10dp"
+    android:elevation="4dp">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
+        android:layout_width="0dp"
+        android:layout_weight="7"
+        android:layout_height="wrap_content"
+        android:background="@drawable/card_background"
+        android:orientation="horizontal"
+        android:padding="12dp">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="6"
+        android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:orientation="vertical" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/primaryText"
             android:text="Course Code:"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/primaryText"
             android:text="Course Name:"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/primaryText"
             android:text="Days of the Week:"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/primaryText"
             android:text="Course Hours:"/>
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="220dp"
-        android:layout_height="100dp"
-        android:gravity="center_horizontal"
+        android:layout_width="0dp"
+        android:layout_weight="4"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:orientation="vertical" >
 
@@ -43,28 +62,32 @@
             android:id="@+id/courseIDTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/secondaryText"
             android:text="COMP 2160"/>
 
         <TextView
             android:id="@+id/courseNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/secondaryText"
             android:text="Mobile Programming"/>
 
         <TextView
             android:id="@+id/courseDaysTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/secondaryText"
             android:text="Days of the Week:"/>
 
         <TextView
             android:id="@+id/courseHoursTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/secondaryText"
             android:text="Course Hours:"/>
 
     </LinearLayout>
-
+    </LinearLayout>
     <LinearLayout
         android:layout_width="40dp"
         android:layout_height="100dp"
@@ -75,7 +98,7 @@
             android:id="@+id/courseScheduleDeleteButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:backgroundTint="@color/red"
+            android:backgroundTint="@color/secondaryBtn"
             android:gravity="center"
             android:src="@drawable/ic_delete" />
 
