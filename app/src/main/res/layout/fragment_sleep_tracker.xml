@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".SleepTrackerFragment"
     android:layout_marginBottom="15sp"
-    android:paddingBottom="100dp"
+    android:paddingBottom="110dp"
     android:background="@color/background">
 
     <LinearLayout
