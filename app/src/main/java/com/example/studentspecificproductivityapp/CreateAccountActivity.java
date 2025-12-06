@@ -27,11 +27,6 @@ public class CreateAccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_create_account);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
         signInRedirect = findViewById(R.id.signInRedirectText);
         createAccountButton = findViewById(R.id.createAccountButton);
@@ -63,8 +58,6 @@ public class CreateAccountActivity extends AppCompatActivity {
 
                         success = databaseHelper.addUser(user);
                     }
-
-                    Toast.makeText(CreateAccountActivity.this, "Success = " + success, Toast.LENGTH_SHORT).show();
 
                     if (success)
                     {

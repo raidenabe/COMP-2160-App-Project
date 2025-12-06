@@ -32,9 +32,10 @@
 
             <ImageButton
                 android:id="@+id/courseScheduleAddButton"
+                android:padding="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/primaryBtn"
+                android:background="@drawable/add_bg"
                 android:src="@drawable/ic_add" />
 
         </LinearLayout>

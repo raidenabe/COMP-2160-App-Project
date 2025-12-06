@@ -68,6 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColorHint="@color/black"
+            android:textColor="@color/black"
             android:text="@string/new_to_the_app" />
 
         <TextView
