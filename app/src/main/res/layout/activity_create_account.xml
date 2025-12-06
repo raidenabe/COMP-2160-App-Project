@@ -27,6 +27,7 @@
         android:layout_gravity="center"
         android:ems="10"
         android:hint="@string/enter_your_email"
+        android:textColor="@color/black"
         android:textColorHint="@color/black"
         android:inputType="textEmailAddress" />
 
@@ -39,6 +40,7 @@
         android:layout_gravity="center"
         android:ems="10"
         android:inputType="textPassword"
+        android:textColor="@color/black"
         android:textColorHint="@color/black"
         android:hint="@string/enter_your_password" />
 
