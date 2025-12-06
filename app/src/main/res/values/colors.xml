@@ -13,4 +13,5 @@
     <color name="primaryicons">#1E3A8A</color>
     <color name="cardBackground">#FFFFFF</color>
     <color name="addColor">#000000</color>
+    <color name="musicBtn">#3B82F6</color>
 </resources>

@@ -106,11 +106,14 @@
             android:id="@+id/playMusicButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@color/musicBtn"
             android:src="@drawable/ic_music_play"
-            android:layout_gravity="end"/>
+            android:layout_gravity="end"
+            android:layout_marginHorizontal="5dp"/>
         <ImageButton
             android:id="@+id/stopMusicButton"
             android:layout_width="wrap_content"
+            android:background="@color/musicBtn"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_music_stop"
             android:layout_gravity="end"/>

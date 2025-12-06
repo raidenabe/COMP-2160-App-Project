@@ -13,5 +13,6 @@
         <color name="primaryicons">#FFFFFF</color>
         <color name="cardBackground">#1E293B</color>
         <color name="addColor">#FFFFFF</color>
+    <color name="musicBtn">@null</color>
 
 </resources>
