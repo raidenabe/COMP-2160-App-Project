@@ -61,7 +61,7 @@
         android:id="@+id/deleteStudyBtn"
         android:layout_width="90dp"
         android:layout_height="38dp"
-        android:text="Delete"
+        android:text="@string/delete"
         android:textColor="@color/white"
         android:textSize="14sp"
         android:backgroundTint="@color/secondaryBtn"/>

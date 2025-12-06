@@ -21,7 +21,7 @@
 
                 <TextView
                     android:id="@+id/sleepTime"
-                    android:text="Sleep Time: 10:00 PM"
+                    android:text="@string/sleep_time_10_00_pm"
                     android:textSize="18sp"
                     android:textColor="@color/secondaryText"
                     android:layout_marginBottom="6dp"
@@ -30,7 +30,7 @@
 
                 <TextView
                     android:id="@+id/wakeTime"
-                    android:text="Wake Time: 6:00 AM"
+                    android:text="@string/wake_time_6_00_am"
                     android:textSize="18sp"
                     android:textColor="@color/secondaryText"
                     android:layout_marginBottom="6dp"
@@ -39,7 +39,7 @@
 
                 <TextView
                     android:id="@+id/durationTime"
-                    android:text="Duration: 8h 00m"
+                    android:text="@string/duration_8h_00m"
                     android:textSize="18sp"
                     android:textColor="@color/secondaryText"
                     android:layout_width="wrap_content"
@@ -56,7 +56,7 @@
                     android:id="@+id/deleteBtn"
                     android:layout_width="90dp"
                     android:layout_height="38dp"
-                    android:text="Delete"
+                    android:text="@string/delete"
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     android:backgroundTint="@color/secondaryBtn"/>

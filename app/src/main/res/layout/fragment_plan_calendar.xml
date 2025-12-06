@@ -14,7 +14,7 @@
         android:layout_marginTop="50dp"
         android:textStyle="bold"
         android:textSize="25sp"
-        android:text="Select a Date"
+        android:text="@string/select_a_date"
         android:textColor="@color/primaryText"
         />
 

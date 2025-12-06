@@ -48,6 +48,7 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="12dp"
                 android:gravity="center_vertical">
+
                 <ImageView
                     android:id="@+id/imageView2"
                     android:layout_width="24dp"
@@ -55,23 +56,23 @@
                     android:src="@drawable/ic_sleep"
                     app:tint="@color/primaryText"
                     android:layout_marginEnd="12dp"/>
-            <TextView
-                android:id="@+id/sleepRecord"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="@color/primaryText"
-                />
-
-
+                <TextView
+                    android:id="@+id/sleepRecord"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/primaryText"
+                    />
             </LinearLayout>
+
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="12dp"
                 android:gravity="center_vertical">
+
                 <ImageView
                     android:id="@+id/imageView3"
                     android:layout_width="24dp"
@@ -79,17 +80,17 @@
                     android:src="@drawable/ic_book"
                     app:tint="@color/primaryText"
                     android:layout_marginEnd="12dp"/>
-            <TextView
-                android:id="@+id/studyRecord"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="@color/primaryText"
-                android:paddingBottom="8dp"/>
 
-
+                <TextView
+                    android:id="@+id/studyRecord"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/primaryText"
+                    android:paddingBottom="8dp"/>
             </LinearLayout>
+
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -103,22 +104,24 @@
                     android:src="@drawable/ic_list"
                     app:tint="@color/primaryText"
                     android:layout_marginEnd="12dp"/>
-            <TextView
-                android:id="@+id/totalTasks"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="@color/primaryText"
-                android:paddingBottom="8dp"/>
 
+                    <TextView
+                        android:id="@+id/totalTasks"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="@color/primaryText"
+                        android:paddingBottom="8dp"/>
             </LinearLayout>
+
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="12dp"
                 android:gravity="center_vertical">
+
                 <ImageView
                     android:id="@+id/imageView5"
                     android:layout_width="24dp"
@@ -126,20 +129,23 @@
                     android:src="@drawable/ic_check_circle"
                     app:tint="@color/primaryText"
                     android:layout_marginEnd="12dp"/>
-            <TextView
-                android:id="@+id/completedTasks"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="@color/primaryText"
-                android:paddingBottom="8dp"/>
+
+                    <TextView
+                        android:id="@+id/completedTasks"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="@color/primaryText"
+                        android:paddingBottom="8dp"/>
             </LinearLayout>
+
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical">
+
                 <ImageView
                     android:id="@+id/imageView6"
                     android:layout_width="24dp"
@@ -147,14 +153,15 @@
                     android:src="@drawable/ic_event"
                     app:tint="@color/primaryText"
                     android:layout_marginEnd="12dp"/>
-            <TextView
-                android:id="@+id/plannedEvent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="@color/primaryText"
-                android:paddingBottom="8dp"/>
+
+                    <TextView
+                        android:id="@+id/plannedEvent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="@color/primaryText"
+                        android:paddingBottom="8dp"/>
             </LinearLayout>
 
         </LinearLayout>

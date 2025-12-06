@@ -68,6 +68,7 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
                 String newPassword = newPasswordText.getText().toString();
                 db.changePassword(sessionManagement.getUserId(), newPassword);
+                Toast.makeText(getContext(), "Password changed successfully.", Toast.LENGTH_SHORT).show();
             }
         });
 

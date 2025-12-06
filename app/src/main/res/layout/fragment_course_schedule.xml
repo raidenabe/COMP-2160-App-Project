@@ -21,7 +21,7 @@
             android:textStyle="bold"
             android:layout_marginTop="50dp"
             android:layout_marginBottom="20dp"
-            android:text="Course Schedule" />
+            android:text="@string/course_schedule" />
 
 
         <LinearLayout
@@ -47,8 +47,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-
     </LinearLayout>
-
 
 </FrameLayout>

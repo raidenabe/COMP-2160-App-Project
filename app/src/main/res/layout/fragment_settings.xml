@@ -27,12 +27,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Appearance"
+            android:text="@string/appearance"
             android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="#777"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"/>
+
         <com.google.android.material.materialswitch.MaterialSwitch
             android:id="@+id/changeTheme"
             android:layout_width="wrap_content"
@@ -40,15 +41,17 @@
             android:paddingVertical="12dp"
             android:text="@string/enable_dark_mode"
             android:textSize="16sp"/>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#333333"
             android:layout_marginVertical="16dp"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Account"
+            android:text="@string/account"
             android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="#777"
@@ -56,10 +59,9 @@
             android:paddingBottom="8dp"/>
 
         <com.google.android.material.textfield.TextInputLayout
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter new email" >
+            android:hint="@string/enter_new_email" >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/newEmailEditText"
@@ -76,13 +78,13 @@
             android:layout_marginTop="12dp"
             android:textColor="@color/white"
             android:backgroundTint="@color/primaryBtn"
-            android:text="Apply" />
+            android:text="@string/apply" />
 
         <com.google.android.material.textfield.TextInputLayout
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter new Password" >
+            android:hint="@string/enter_new_password" >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/newPasswordEditText"
@@ -99,7 +101,7 @@
             android:layout_marginTop="12dp"
             android:textColor="@color/white"
             android:backgroundTint="@color/primaryBtn"
-            android:text="Apply" />
+            android:text="@string/apply" />
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"

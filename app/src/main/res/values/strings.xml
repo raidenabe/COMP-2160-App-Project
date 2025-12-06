@@ -47,4 +47,21 @@
     <string name="date">Date</string>
     <string name="duration">Duration</string>
     <string name="subject">Subject</string>
+    <string name="course_schedule">Course Schedule</string>
+    <string name="music_player">Music Player</string>
+    <string name="select_a_date">Select a Date</string>
+    <string name="account">Account</string>
+    <string name="apply">Apply</string>
+    <string name="appearance">Appearance</string>
+    <string name="duration_8h_00m">Duration: 8h 00m</string>
+    <string name="wake_time_6_00_am">Wake Time: 6:00 AM</string>
+    <string name="sleep_time_10_00_pm">Sleep Time: 10:00 PM</string>
+    <string name="event_name">Event Name</string>
+    <string name="_10_00">10:00</string>
+    <string name="comp_2160">COMP 2160</string>
+    <string name="mobile_programming">Mobile Programming</string>
+    <string name="days_of_the_week">Days of the Week:</string>
+    <string name="course_hours">Course Hours:</string>
+    <string name="course_name">Course Name:</string>
+    <string name="course_code">Course Code:</string>
 </resources>

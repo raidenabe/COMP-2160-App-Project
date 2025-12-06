@@ -370,6 +370,16 @@ public class  DatabaseHelper extends SQLiteOpenHelper {
         return db.delete(COURSE_TABLE, COLUMN_COURSE_USER_ID + " = ? and " + COLUMN_COURSE_CODE + " = ? ", new String[]{String.valueOf(userId), courseCode}) > 0;
     }
 
+    public boolean isCourseCodeUsed(int userId, String courseCode) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("Select * from " + COURSE_TABLE + " where " + COLUMN_COURSE_USER_ID + " = ? and " + COLUMN_COURSE_CODE + " = ? ", new String[]{String.valueOf(userId), courseCode});
+
+        boolean courseCodeFound = cursor.getCount() > 0;
+        db.close();
+        cursor.close();
+        return courseCodeFound;
+    }
+
     public ArrayList<CourseModel> getAllCoursesForUser(int userId) {
         ArrayList<CourseModel> arr = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();

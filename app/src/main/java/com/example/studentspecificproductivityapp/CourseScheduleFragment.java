@@ -89,10 +89,17 @@ public class CourseScheduleFragment extends Fragment implements CourseAdapter.On
                         String courseDays = inputCourseDays.getText().toString().trim();
                         String courseHours = inputCourseHours.getText().toString().trim();
 
-                        CourseModel course = new CourseModel(userId, courseCode, courseName, courseDays, courseHours);
-                        db.addCourse(course);
-                        courseList.add(course);
-                        adapter.notifyDataSetChanged();
+                        if (db.isCourseCodeUsed(sessionManagement.getUserId(), courseCode))
+                        {
+                            Toast.makeText(getContext(), "Course Code needs to be unique. Please try again.", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            CourseModel course = new CourseModel(userId, courseCode, courseName, courseDays, courseHours);
+                            db.addCourse(course);
+                            courseList.add(course);
+                            adapter.notifyDataSetChanged();
+                        }
                     }
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
