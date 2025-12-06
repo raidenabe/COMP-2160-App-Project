@@ -27,6 +27,7 @@
         android:layout_gravity="center"
         android:ems="10"
         android:hint="@string/enter_your_email"
+        android:textColorHint="@color/black"
         android:inputType="textEmailAddress" />
 
     <EditText
@@ -38,6 +39,7 @@
         android:layout_gravity="center"
         android:ems="10"
         android:inputType="textPassword"
+        android:textColorHint="@color/black"
         android:hint="@string/enter_your_password" />
 
     <Button
@@ -64,6 +66,7 @@
             android:id="@+id/alreadyHaveAccountText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:text="@string/already_have_an_account" />
 
         <TextView

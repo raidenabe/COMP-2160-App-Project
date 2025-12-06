@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="12dp"
     android:gravity="center"
     android:layout_margin="10dp"
     android:elevation="4dp"
@@ -16,6 +15,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/card_background"
         android:orientation="horizontal"
+        android:padding="12dp"
         android:gravity="center_vertical">
 
         <CheckBox

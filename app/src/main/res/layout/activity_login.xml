@@ -25,6 +25,7 @@
         android:layout_weight="1"
         android:layout_marginTop="60dp"
         android:layout_gravity="center"
+        android:textColorHint="@color/black"
         android:ems="10"
         android:inputType="textEmailAddress"
         android:hint="@string/enter_your_email" />
@@ -35,6 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_marginTop="10dp"
+        android:textColorHint="@color/black"
         android:layout_gravity="center"
         android:ems="10"
         android:inputType="textPassword"
@@ -63,6 +65,7 @@
             android:id="@+id/newToAppText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColorHint="@color/black"
             android:text="@string/new_to_the_app" />
 
         <TextView
